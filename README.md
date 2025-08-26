@@ -1,0 +1,1 @@
+ A missão do sistema é oferecer uma ferramenta tecnológica simples, eficaz e acessível que auxilie ONGs na organização e controle de suas atividades voltadas à proteção animal, promovendo a transparência, a responsabilidade e o engajamento da sociedade.
