@@ -2,12 +2,16 @@ package proj.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Voluntario {
 	@Id
 	private long id;
-	private long usuario_id;
+	@OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 	
 	
 	public long getId() {
@@ -18,12 +22,12 @@ public class Voluntario {
 		this.id = id;
 	}
 	
-	public long getUsuario_id() {
-		return usuario_id;
+	public Usuario getUsuario_id() {
+		return usuario;
 	}
 	
-	public void setUsuario_id(long usuario_id) {
-		this.usuario_id = usuario_id;
+	public void setUsuario_id(Usuario u) {
+		this.usuario = u;
 	}
 	
 

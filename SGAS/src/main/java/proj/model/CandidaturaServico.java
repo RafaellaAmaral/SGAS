@@ -4,18 +4,26 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class CandidaturaServico {
 	
 	@Id
 	private long id;
+	@OneToOne
+    @JoinColumn(name = "voluntario_usuario_id")
 	private Voluntario voluntario;
+	@OneToOne
+    @JoinColumn(name = "servico_id")
 	private Servico servico;
 	private LocalDateTime dataCandidatura;
 	private String status;
 	private LocalDateTime dataServico;
 	private byte presenca;
+	@OneToOne
+    @JoinColumn(name = "funcionario_responsavel_id")
 	private Usuario funcionarioResponsavel;
 	
 	public long getId() {

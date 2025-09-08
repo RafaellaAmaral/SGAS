@@ -4,14 +4,19 @@ import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Tutor {
 
 	@Id
 	private long id;
-	private long usuario_id;
-	private ArrayList<Animal> listaFavoritos = new ArrayList<Animal>();
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    private ArrayList<Animal> listaFavoritos = new ArrayList<>();
 	
 	
 	public long getId() {
@@ -22,12 +27,12 @@ public class Tutor {
 		this.id = id;
 	}
 	
-	public long getUsuario_id() {
-		return usuario_id;
+	public Usuario getUsuario_id() {
+		return usuario;
 	}
 	
-	public void setUsuario_id(long usuario_id) {
-		this.usuario_id = usuario_id;
+	public void setUsuario_id(Usuario u) {
+		this.usuario = u;
 	}
 	
 	public ArrayList<Animal> getListaFavoritos() {

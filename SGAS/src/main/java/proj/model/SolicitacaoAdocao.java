@@ -2,13 +2,19 @@ package proj.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class SolicitacaoAdocao {
 
 	@Id
 	private long id;
+	@OneToOne
+    @JoinColumn(name = "animal_id")
 	private Animal animal;
+	@OneToOne
+    @JoinColumn(name = "tutor_usuario_id")
 	private Tutor tutor;
 	
 	
