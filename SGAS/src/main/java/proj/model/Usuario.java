@@ -11,7 +11,7 @@ public class Usuario {
 	private String email;
 	private String nome;
 	private String senha;
-	private String tipo;
+	private String role;
 	
 	public long getId() {
 		return id;
@@ -45,11 +45,11 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
-	public String getTipo() {
-		return tipo;
+	public String getRole() {
+		return role;
 	}
 	
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipo(String role) {
+		this.role = role;
 	}
 }
