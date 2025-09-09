@@ -3,9 +3,11 @@ package proj.dao;
 import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import proj.model.Animal;
 
+@Repository
 public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 	
 	Animal findByNome(String nome);
@@ -14,6 +16,6 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 	
 	ArrayList<Animal> findByPorte(byte porte);
 	
-	ArrayList<Animal> findByRaca(byte raca);
+	ArrayList<Animal> findByRaca(String raca);
 
 }
