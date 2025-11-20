@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Amigo</title>
+    <link rel="stylesheet" href="voluntarios.css">
+    <link rel="shortcut icon" href="images/iconesite.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header id="header-login">
+        <div class="logo">
+            <img src="/static/images/patas.png" alt="Logo de pata Pet Amigo">
+            <h1>Pet Amigo</h1>
+        </div>
+        <a href="login.html"><button class="log">Faça Login</button></a>
+    </header>
+
+    <header id="header-1">
+        <nav>
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <a href="quero-adotar.html">Quero adotar</a>
+                <div class="dropdown-content">
+                    <a href="quero-adotar.html">Adote</a>
+                    <a href="#">Animais curtidos</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="#">Forma de ajudar</a>
+                <div class="dropdown-content">
+                    <a href="doacao.html"> Faça uma Doação</a>
+                    <a href="voluntarios.html">Seja voluntário</a>
+                </div>
+
+            </div>
+            <a href="#">Fale conosco</a>
+            <button class="doacao">Faça uma doação</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <body>
+            <section id="voluntarios">
+                <div>
+                    <h2>Voluntário</h2>
+                    <h3>Seja um voluntário, mude a vida dos animais de rua.</h3>
+                </div>
+            </section>
+
+            <section>
+                <div id="texto">
+                    <h3>Faça parte dessa transformação: seja voluntário!</h3>
+                    <p>
+                        Se você ama os animais e quer contribuir com uma causa que realmente importa, junte-se à ONG
+                        Paraíso dos Focinhos.
+                        Estamos em busca de pessoas dispostas a cuidar, brincar e ajudar na adoção dos nossos
+                        companheiros de quatro patas.
+                        Tem amor de sobra e vontade de fazer a diferença? Então essa missão é pra você!
+                        Preencha o formulário abaixo e entraremos em contato com você em breve.
+
+                    </p>
+                    <button type="button" class="btn-filtro abrir-modal">Quero ser voluntário</button>
+
+                </div>
+            </section>
+        </body>
+        <div id="modal-adotar" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3 id="modaltit">Formulário de voluntário</h3>
+                <form id="form-voluntario">
+                    <div class="campo">
+                        <label for="nome">Nome completo:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="campo">
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                    </div>
+                
+                    <div class="campo">
+                        <label for="endereco">Endereço:</label>
+                        <input type="text" id="endereco" name="endereco" required>
+                    </div>
+                    <div class="campo">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+
+                    <button type="submit" class="btn-filtro">Enviar</button>
+                </form>
+            </div>
+        </div>
+        <script src="modal.js"></script>
+
+    </main>
+
+    <footer>
+        <div class="sobre">
+            <img src="/static/images/pata.png" alt="Ícone de pata">
+            <p>Lorem Ipsum is simply dummy text.</p>
+        </div>
+        <div class="qrcode">
+            <img src="/static/images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+            <button>SitePetAmigo.br</button>
+        </div>
+        <div class="contato">
+            <h3>Contato</h3>
+            <p><img src="/static/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+            <p><img src="/static/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+        </div>
+        <div class="coracao">
+            <img src="/static/images/transferir.webp" alt="Coração com pata">
+        </div>
+    </footer>
