@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="shortcut icon" href="images/iconesite.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header Superior -->
+  <header id="header-login">
+    <div class="logo">
+      <img src="/static/images/patas.png" alt="Logo de pata Pet Amigo">
+      <h1>Pet Amigo</h1>
+    </div>
+    <a href="login.html"><button class="log">Faça Login</button></a>
+  </header>
+
+  <!-- Header Inferior -->
+  <header id="header-1">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="quero-adotar.html">Quero adotar</a>
+        <div class="dropdown-content">
+          <a href="quero-adotar.html">Adote</a>
+          <a href="#">Animais curtidos</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Forma de ajudar</a>
+        <div class="dropdown-content">
+          <a href="doacao.html">Faça uma Doação</a>
+          <a href="voluntarios.html">Seja voluntário</a>
+        </div>
+      </div>
+      <a href="#">Fale conosco</a>
+      <button class="doacao">Faça uma doação</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Formulário de Login -->
+      <div class="form-box" id="login-box">
+        <h2>Login</h2>
+        <form>
+          <div class="campo">
+            <label for="email-login">E-mail:</label>
+            <input type="email" id="email-login" required>
+          </div>
+          <div class="campo">
+            <label for="senha-login">Senha:</label>
+            <input type="password" id="senha-login" required>
+          </div>
+          <button type="submit" class="btn">Entrar</button>
+        </form>
+        <p class="toggle">Não tem cadastro? <a href="#" id="mostrar-cadastro">Cadastre-se</a></p>
+      </div>
+
+      <div class="form-box hidden" id="cadastro-box">
+        <h2>Cadastro</h2>
+        <form>
+          <div class="campo">
+            <label for="email-cadastro">E-mail:</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="campo">
+            <label for="senha-cadastro">Senha:</label>
+            <input type="password" id="senha" required>
+          </div>
+          <div class="campo">
+            <label for="confirma-senha">Confirme sua senha:</label>
+            <input type="password">
+          </div>
+          <div class="campo">
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" required>
+          </div>
+          <div class="campo">
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" required>
+          </div>
+          <button type="submit" class="btn">Cadastrar</button>
+        </form>
+        <p class="toggle">Já tem cadastro? <a href="#" id="mostrar-login">Entrar</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="sobre">
+      <img src="/static/images/pata.png" alt="Ícone de pata">
+      <p>Lorem Ipsum is simply dummy text.</p>
+    </div>
+    <div class="qrcode">
+      <img src="/static/images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+      <button>SitePetAmigo.br</button>
+    </div>
+    <div class="contato">
+      <h3>Contato</h3>
+      <p><img src="/static/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+      <p><img src="/static/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+    </div>
+    <div class="coracao">
+      <img src="/static/images/transferir.webp" alt="Coração com pata">
+    </div>
+  </footer>
+
+  <script src="login.js"></script>
+</body>
+
+</html>
