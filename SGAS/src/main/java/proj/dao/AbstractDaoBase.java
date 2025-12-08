@@ -9,9 +9,9 @@ import java.sql.Statement;
 public abstract class AbstractDaoBase {
 
     public static Connection getConnection() throws SQLException {
-        String url = "jdbc:postgresql://localhost:5432/SGAS?createDatabaseIfNotExist=true&characterEncoding=UTF-8"; // Altere para a URL do seu banco de dados
-        String user = "postgres"; // Altere para seu usuário
-        String password = "postgres"; // Altere para sua senha
+        String url = "jdbc:postgresql://localhost:5050/SGAS?createDatabaseIfNotExist=true&characterEncoding=UTF-8"; // Altere para a URL do seu banco de dados
+        String user = "postgres"; 
+        String password = "cruzeiro"; 
         return DriverManager.getConnection(url, user, password);
     }
 
