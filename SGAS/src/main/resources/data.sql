@@ -12,6 +12,7 @@ VALUES
 ;
 
 
+
 INSERT INTO animal (id, porte, sexo, data_nascimento,  descricao, imagem_url, nome, raca) 
 VALUES 
 (1,'P','M','2025-06-01','Muito novo','url1','tico','pincher'),
