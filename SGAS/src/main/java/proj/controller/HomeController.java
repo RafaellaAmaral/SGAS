@@ -10,7 +10,16 @@ public class HomeController {
 	
 	@GetMapping
 	public String mostraPaginaInicial() {
-		return "home";
+		return "index";
 	}
 
+	@GetMapping("login")
+	public String login() {
+		return "login";
+	}
+	
+	@GetMapping("erro")
+	public String erro() {
+		return "erro";
+	}
 }

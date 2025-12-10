@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Amigo</title>
+	<link rel="stylesheet" href="../static/css/index.css"> 
+</head>
+<body>
+	<header id="header-login">
+	      <div class="logo">
+	      <img src="../static/images/patas.png" alt="Stylized paw print logo, centered and playful, representing the Pet Amigo brand in a welcoming and friendly website header">
+	      <h1>Pet Amigo</h1>
+	    </div>
+	  </header>
+
+<!--	<nav>
+		<p id="nome-no-portal" th:text="${nome}"></p>
+	    <a href="/aluno/perfil" class="icone" id="icone-pesquisa-aluno">
+	        <img src="/img/icone-perfil.png">
+	        <label>Perfil</label>
+	    </a>
+	</nav>   -->
+	
+    <main>		
+		
+        <section class="candidaturas-list">
+            <div class="candidaturas-container">
+                <article class="candidaturas-card" th:each="candidatura : ${listaCandidaturas}">
+                    <h2 th:text="${candidatura.usuario.id}"></h2>
+					<h2 th:text="${candidatura.servico.id}"></h2>
+                    <p th:text="${candidatura.status}"></p>
+ <!--                  <div class="tags">
+                        <span th:text="${aluno.curso}"></span>
+                        <span th:text="${aluno.periodo}"></span>
+                    </div> --> 
+					
+					<form th:action="@{'/administrador/aprovar/' + ${candidatura.usuario.id} + '/' + ${candidatura.servico.id}}" method="post">
+					        <button type="submit">✅ Aprovar</button>
+					    </form>
+
+					<form th:action="@{'/administrador/negar/' + ${candidatura.usuario.id} + '/' + ${candidatura.servico.id}}" method="post">
+					        <button type="submit">❌ Negar</button>
+				    </form>
+                </article>
+            </div>
+        </section>
+		
+    </main>
+	
+</body>
+</html>

@@ -1,61 +1,30 @@
 package proj.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class DoacaoFinanceira {
 
+	@EqualsAndHashCode.Include
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	
 	private double valor;
-	private String comprovanteURL; 
 	private String observacao;
-	@OneToOne
+	
+	@ManyToOne
     @JoinColumn(name = "usuario_id")
 	private Usuario doador;
-	
-	
-	public long getId() {
-		return id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	public double getValor() {
-		return valor;
-	}
-	
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-	
-	public String getComprovanteURL() {
-		return comprovanteURL;
-	}
-	
-	public void setComprovanteURL(String comprovanteURL) {
-		this.comprovanteURL = comprovanteURL;
-	}
-	
-	public String getObservacao() {
-		return observacao;
-	}
-	
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-	
-	public Usuario getDoador() {
-		return doador;
-	}
-	
-	public void setDoador(Usuario doador) {
-		this.doador = doador;
-	}
 	
 }

@@ -1,6 +1,5 @@
 package proj.security;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import proj.dao.HDataSource;
-import proj.dao.UsuarioRepository;
 import proj.model.Usuario;
+import proj.repository.UsuarioRepository;
 
 @Service
 public class JdbcUserDetailsService implements UserDetailsService {
-	
-	@Autowired
-	private HDataSource ds;
 	
 	@Autowired
     private UsuarioRepository usuarioRepository;
@@ -30,12 +25,15 @@ public class JdbcUserDetailsService implements UserDetailsService {
 	throws UsernameNotFoundException 
 	{
 		
-        try (Connection conn = ds.getConnection()) {
+        try  {
         	
-        	Usuario usuario = usuarioRepository.findByNome(username); //cpf
+        	Usuario usuario = usuarioRepository.findByEmail(username); //cemail
 
         	ArrayList<GrantedAuthority> roles = new ArrayList<GrantedAuthority>() ;
-        	roles.add(new SimpleGrantedAuthority("ROLE_"+usuario.getRole()));
+        	
+        	if (usuario.isAdministrador()) {
+        		roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        	}
         	
         	return new User(username, usuario.getSenha(), roles);
 			

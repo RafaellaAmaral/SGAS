@@ -1,65 +1,58 @@
 package proj.model;
 
-import jakarta.persistence.Column;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "usuario")
 public class Usuario {
 	
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "email")
+	
 	private String email;
-	@Column(name = "nome")
+	
 	private String nome;
-	@Column(name = "senha")
+	
 	private String senha;
-	@Column(name = "role")
-	private String role;
 	
-	public long getId() {
-		return id;
-	}
+	private boolean isAdministrador = false;
 	
-	public void setId(long id) {
-		this.id = id;
-	}
+//	@ManyToMany
+//	@JoinTable(name = "user_tem_role", 
+//			  joinColumns = @JoinColumn(name = "usuario_id"), 
+//			  inverseJoinColumns = @JoinColumn(name = "role_id"))
+//	private List<Role> roles = new ArrayList<>();	
 	
-	public String getEmail() {
-		return email;
-	}
+	@ManyToMany
+	@JoinTable(name = "usario_fav_animal", 
+	  joinColumns = @JoinColumn(name = "usuario_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "animal_id"))
+	private List<Animal> favoritos  = new ArrayList<>();	
 	
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	
-	public String getNome() {
-		return nome;
-	}
+	@OneToMany(mappedBy = "usuario")
+    Set<CandidaturaServico> candidaturas = new HashSet<>();
 	
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	@OneToMany(mappedBy = "usuario")
+    Set<SolicitacaoAdocao> solicitacoesAdocao = new HashSet<>();
 	
-	public String getSenha() {
-		return senha;
-	}
-	
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
-	public String getRole() {
-		return role;
-	}
-	
-	public void setRole(String role) {
-		this.role = role;
-	}
 }

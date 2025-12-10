@@ -44,13 +44,13 @@ public class AnimalController {
         animal.setSexo(sexo);   
         animal.setDataNascimento(LocalDate.now().minusYears(idade));
 
-        try {
-            if (!imagem.isEmpty()) {
-                animal.setImagem(imagem.getBytes());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if (!imagem.isEmpty()) {
+//TODO                animal.setImagem(imagem.getBytes());
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         animalService.inserir(animal);
         return "redirect:/admin/listar-animais";
@@ -96,13 +96,13 @@ public class AnimalController {
             animal.setSexo(sexo);
             animal.setDataNascimento(LocalDate.now().minusYears(idade));
 
-            try {
-                if (!imagem.isEmpty()) {
-                    animal.setImagem(imagem.getBytes());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                if (!imagem.isEmpty()) {
+///TODO                    animal.setImagem(imagem.getBytes());
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
             animalService.alterar(animal);
         }

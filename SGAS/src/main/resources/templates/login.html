@@ -1,20 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-br" >
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="/SGAS/src/main/resources/static/css/login.css">
+  <link rel="stylesheet" href="css/login.css">
   <link rel="shortcut icon" href="images/iconesite.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
+	
+	<script>
+	  function validateLogonForm(form) {
+	  
+	    if (form.j_username.value == '') {
+	      alert('O email do usuário é obrigatória.');
+	      form.j_username.focus();
+	      return false;
+	    }
+	    if (form.j_password.value == '') {
+	      alert('A senha é obrigatória.');
+	      form.j_password.focus();
+	      return false;
+	    }
+
+	    return true;
+	  }
+	</script>
+		
   <!-- Header Superior -->
   <header id="header-login">
     <div class="logo">
-      <img src="/static/images/patas.png" alt="Logo de pata Pet Amigo">
+      <img src="images/patas.png" alt="Logo de pata Pet Amigo">
       <h1>Pet Amigo</h1>
     </div>
     <a href="login.html"><button class="log">Faça Login</button></a>
@@ -49,17 +71,27 @@
       <!-- Formulário de Login -->
       <div class="form-box" id="login-box">
         <h2>Login</h2>
-        <form>
+		
+		<div th:if="${param.error}">
+		    Email e/ou senha inválido
+		</div>
+				
+        <form 	th:action="@{/login}"  method="post" onsubmit="return validateLogonForm(this);" >
+			
           <div class="campo">
             <label for="email-login">E-mail:</label>
-            <input type="email" id="email-login" required>
+            <input type="email" id="username" required name="username">
           </div>
+		  
           <div class="campo">
             <label for="senha-login">Senha:</label>
-            <input type="password" id="senha-login" required>
+            <input type="password" id="password" required name="password">
           </div>
+		  
           <button type="submit" class="btn">Entrar</button>
         </form>
+		
+		
         <p class="toggle">Não tem cadastro? <a href="#" id="mostrar-cadastro">Cadastre-se</a></p>
       </div>
 
@@ -95,20 +127,20 @@
 
   <footer>
     <div class="sobre">
-      <img src="/static/images/pata.png" alt="Ícone de pata">
+      <img src="images/pata.png" alt="Ícone de pata">
       <p>Lorem Ipsum is simply dummy text.</p>
     </div>
     <div class="qrcode">
-      <img src="/static/images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+      <img src="images/qrsgas.png" alt="QR Code para doação" id="qr-code">
       <button>SitePetAmigo.br</button>
     </div>
     <div class="contato">
       <h3>Contato</h3>
-      <p><img src="/static/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
-      <p><img src="/static/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+      <p><img src="images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+      <p><img src="images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
     </div>
     <div class="coracao">
-      <img src="/static/images/transferir.webp" alt="Coração com pata">
+      <img src="images/transferir.webp" alt="Coração com pata">
     </div>
   </footer>
 

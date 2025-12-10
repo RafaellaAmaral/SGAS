@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quero adotar</title>
+    <link rel="stylesheet" href="/SGAS/src/main/resources/static/css/quero-adotar.css">
+    <link rel="shortcut icon" href="images/iconesite.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header id="header-login">
+        <div class="logo">
+            <img src="/SGAS/src/main/resources/static/images/patas.png" alt="Logo de pata Pet Amigo">
+            <h1>Pet Amigo</h1>
+        </div>
+        <a href="login.html"><button class="log">Faça Login</button></a>
+    </header>
+
+    <header id="header-1">
+        <nav>
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <a href="#">Quero adotar</a>
+                <div class="dropdown-content">
+                    <a href="quero-adotar.html">Adote</a>
+                    <a href="#">Animais curtidos</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Forma de ajudar</a>
+                <div class="dropdown-content">
+                    <a href="doacao.html">Faça uma Doação</a>
+                    <a href="voluntarios.html">Seja voluntário</a>
+                </div>
+            </div>
+            <a href="#">Fale conosco</a>
+            <button class="doacao">Faça uma doação</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="adote">
+            <div>
+                <h2>Adote</h2>
+                <h3>Mude a vida dos animais de rua.</h3>
+            </div>
+        </section>
+
+        <section>
+            <div id="texto">
+                <p>
+                    Adotar muda histórias, inclusive a sua!
+                    Dar um lar a um animal é um gesto de carinho e responsabilidade que combate o abandono e oferece
+                    uma nova chance a quem mais precisa.
+                    Ao adotar, você salva uma vida e ajuda a criar espaço para que outros animais também sejam
+                    acolhidos.
+                </p>
+                <p>
+                    Conheça agora algumas histórias de pets incríveis que esperam por uma família em Belo Horizonte
+                </p>
+                <div id="btn-animais">
+                    <button class="animais" onclick="location.href='#filtro-caes'">Cães</button>
+                    <button class="animais" onclick="location.href='#filtro-gatos'">Gatos</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="filtro-caes" class="filtro">
+            <h3 class="filtro-tit">Adote um cãozinho</h3>
+            <form id="form-caes">
+                <div class="campo">
+                    <label for="tamanho-caes">Tamanho do Cachorro:</label>
+                    <select id="tamanho-caes" name="tamanho">
+                        <option value="">Selecione</option>
+                        <option value="pequeno">Pequeno</option>
+                        <option value="medio">Médio</option>
+                        <option value="grande">Grande</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label for="genero-caes">Gênero:</label>
+                    <select id="genero-caes" name="genero">
+                        <option value="">Selecione</option>
+                        <option value="macho">Macho</option>
+                        <option value="femea">Fêmea</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-filtro">Encontrar cães</button>
+                <button type="button" class="btn-filtro abrir-modal">Quero adotar</button>
+
+            </form>
+        </section>
+        <section id="lista-caes" class="cards-animais"></section>
+
+        <section id="filtro-gatos" class="filtro">
+            <h3 class="filtro-tit">Adote um gatinho</h3>
+            <form id="form-gatos">
+                <div class="campo">
+                    <label for="porte-gatos">Tamanho:</label>
+                    <select id="porte-gatos" name="porte">
+                        <option value="">Selecione</option>
+                        <option value="pequeno">Pequeno</option>
+                        <option value="medio">Médio</option>
+                        <option value="grande">Grande</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label for="genero-gatos">Gênero:</label>
+                    <select id="genero-gatos" name="genero">
+                        <option value="">Selecione</option>
+                        <option value="macho">Macho</option>
+                        <option value="femea">Fêmea</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-filtro">Encontrar gatos</button>
+                <button type="button" class="btn-filtro abrir-modal">Quero adotar</button>
+
+            </form>
+        </section>
+        <section id="lista-gatos" class="cards-animais"></section>
+    </main>
+
+    <div id="modal-adotar" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Formulário de Adoção</h2>
+            <form id="form-adocao">
+                <div class="campo">
+                    <label for="nome">Nome completo:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div class="campo">
+                <label for="animal-id">Insira o nome de um animal:</label><br>
+                <input type="text" id="animal-id" autocomplete="off">
+                <ul id="sugestoes"></ul>
+                </div>
+
+                <button type="submit" class="btn-filtro">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="sobre">
+            <img src="/SGAS/src/main/resources/static/images/pata.png" alt="Ícone de pata">
+            <p>Lorem Ipsum is simply dummy text.</p>
+        </div>
+        <div class="qrcode">
+            <img src="/SGAS/src/main/resources/static/images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+            <button>SitePetAmigo.br</button>
+        </div>
+        <div class="contato">
+            <h3>Contato</h3>
+            <p><img src="/SGAS/src/main/resources/static/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+            <p><img src="/SGAS/src/main/resources/static/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+        </div>
+        <div class="coracao">
+            <img src="/SGAS/src/main/resources/static/images/transferir.webp" alt="Coração com pata">
+        </div>
+    </footer>
+    <script src="/SGAS/src/main/resources/static/js/mock-animais.js"></script>
+    <script src="/SGAS/src/main/resources/static/js/modal.js"></script>
+</body>
+
+</html>

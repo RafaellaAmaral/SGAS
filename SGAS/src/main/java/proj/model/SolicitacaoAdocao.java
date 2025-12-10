@@ -1,45 +1,38 @@
 package proj.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class SolicitacaoAdocao {
 
+	@EqualsAndHashCode.Include
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@OneToOne
+	
+	@ManyToOne
     @JoinColumn(name = "animal_id")
 	private Animal animal;
-	@OneToOne
-    @JoinColumn(name = "tutor_usuario_id")
-	private Tutor tutor;
 	
+	@ManyToOne
+    @JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 	
-	public long getId() {
-		return id;
-	}
+	private String status;
 	
-	public void setId(long id) {
-		this.id = id;
-	}
+	private LocalDate dataSolicitacao;
 	
-	public Animal getAnimal() {
-		return animal;
-	}
-	
-	public void setAnimal(Animal animal) {
-		this.animal = animal;
-	}
-	
-	public Tutor getTutor() {
-		return tutor;
-	}
-	
-	public void setTutor(Tutor tutor) {
-		this.tutor = tutor;
-	}
-	
+    // additional properties
+    // standard constructors, getters, and setters	
 }
