@@ -22,4 +22,9 @@ public class HomeController {
 	public String erro() {
 		return "erro";
 	}
+	
+	@GetMapping("cadastro")
+	public String suco() {
+		return "cadastro";
+	}
 }
