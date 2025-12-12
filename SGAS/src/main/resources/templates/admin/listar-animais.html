@@ -42,8 +42,9 @@
             <div class="dropdown">
                 <a href="#">Animais para adoção</a>
                 <div class="dropdown-content">
-                    <a href="/SGAS/src/main/resources/templates/admin/cadastrar-animal.html">Cadastrar animal</a>
-                    <a href="/SGAS/src/main/resources/templates/admin/listar-animais.html">Listar animais</a>
+                    <a href="/administrador/cadastrar-animal">Cadastrar animal</a>
+                    <a href="/administrador/listar-animais">Listar animais</a>
+
                 </div>
             </div>
 
@@ -77,7 +78,8 @@
                 <tbody>
                     <tr th:each="a : ${listaAnimais}">
                         <td>
-                            <img th:if="${a.imagemURL != null}" th:src="'data:image/jpeg;base64,' + ${a.imagemURL}" width="100" alt="imagem">
+                            <img th:if="${a.imagemURL != null}" th:src="'data:image/jpeg;base64,' + ${a.imagemURL}"
+                                width="100" alt="imagem">
                         </td>
                         <td th:text="${a.id}"></td>
                         <td th:text="${a.nome}"></td>
@@ -85,16 +87,17 @@
                         <td th:text="${a.porte == 0 ? 'Pequeno' : (a.porte == 1 ? 'Médio' : 'Grande')}"></td>
                         <td th:text="${a.sexo == 0 ? 'Fêmea' : 'Macho'}"></td>
                         <td>
-                        <a th:href="@{'/SGAS/src/main/resources/templates/admin/editar-animal.html' + ${animal.id}}" class="btn editar">Editar</a> |
-                        <a th:href="@{'/admin/remover-animal/' + ${animal.id}}"
-                           onclick="return confirm('Tem certeza que deseja remover?')" class="btn remover">Excluir</a>
-                    </td>
+                            <a th:href="@{'/admin/editar-animal.html' + ${animal.id}}" class="btn editar">Editar</a> |
+                            <a th:href="@{'/admin/remover-animal/' + ${animal.id}}"
+                                onclick="return confirm('Tem certeza que deseja remover?')"
+                                class="btn remover">Excluir</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
 
             <br>
-            <a href="/SGAS/src/main/resources/templates/admin/cadastrar-animal.html">Cadastrar novo animal</a>
+            <a href="/admin/cadastrar-animal.html">Cadastrar novo animal</a>
         </div>
     </main>
 
@@ -117,4 +120,5 @@
         </div>
     </footer>
 </body>
+
 </html>

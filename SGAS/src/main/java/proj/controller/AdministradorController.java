@@ -2,6 +2,7 @@ package proj.controller;
 
 import java.security.Principal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import proj.exception.BadRequestException;
+import proj.model.Animal;
 import proj.model.CandidaturaServico;
 import proj.model.Usuario;
 import proj.repository.UsuarioRepository;
+import proj.service.AnimalService;
 import proj.service.CandidaturaServicoService;
-
 
 @Controller
 @RequestMapping("/administrador")
@@ -30,6 +33,10 @@ public class AdministradorController {
 	
 	@Autowired
 	UsuarioRepository usuarioRepositorio;
+	
+    @Autowired
+    AnimalService animalService;
+
 	
 	@GetMapping
 	public String mostraPaginaInicialAdm(Model model, Principal principal) {
@@ -124,5 +131,83 @@ public class AdministradorController {
 	    candidaturaServicoService.negar(id);
 	    return "redirect:/administrador/listacandidaturas";
 	} */
+
+
+
+
+    @GetMapping("/pag-inicial")
+    public String pagInicial() {
+        return "admin/pag-inicial";
+    }
+
+    @GetMapping("/listar-animais")
+    public String listarAnimais() {
+        return "admin/listar-animais";
+    }
+
+    @GetMapping("/cadastrar-animal")
+    public String cadastrarAnimalForm() {
+        return "admin/cadastrar-animal";
+    }
+
+    @PostMapping("/cadastrar-animal")
+    public String cadastrarAnimal(
+            @RequestParam("nome") String nome,
+            @RequestParam("raca") String raca,
+            @RequestParam("idade") int idade,
+            @RequestParam("porte") String porte,
+            @RequestParam("descricao") String descricao,
+            @RequestParam("sexo") String sexo) {
+
+        Animal animal = new Animal();
+
+        animal.setNome(nome);
+        animal.setRaca(raca);
+        animal.setDescricao(descricao);
+        animal.setPorte(porte);
+        animal.setSexo(sexo);
+        animal.setDataNascimento(LocalDate.now().minusYears(idade));
+
+        animalService.inserir(animal);
+
+        return "redirect:/administrador/listar-animais";
+    }
+
+    @GetMapping("/editar-animal/{id}")
+    public String editarAnimalViaAdmin(@PathVariable("id") long id, Model model) {
+        model.addAttribute("animal", animalService.buscarPeloId(id));
+        return "admin/editar-animal";
+    }
+
+    @GetMapping("/remover-animal/{id}")
+    public String removerAnimalViaAdmin(@PathVariable("id") long id) {
+        animalService.excluir(id);
+        return "redirect:/administrador/listar-animais";
+    }
+
+    @PostMapping("/editar-animal")
+    public String atualizarAnimalViaAdmin(
+            @RequestParam("id") long id,
+            @RequestParam("nome") String nome,
+            @RequestParam("raca") String raca,
+            @RequestParam("idade") int idade,
+            @RequestParam("porte") String porte,
+            @RequestParam("descricao") String descricao,
+            @RequestParam("sexo") String sexo) {
+
+        Animal animal = animalService.buscarPeloId(id);
+
+        if (animal != null) {
+            animal.setNome(nome);
+            animal.setRaca(raca);
+            animal.setDescricao(descricao);
+            animal.setPorte(porte);
+            animal.setSexo(sexo);
+            animal.setDataNascimento(LocalDate.now().minusYears(idade));
+            animalService.alterar(animal);
+        }
+
+        return "redirect:/administrador/listar-animais";
+    }
 
 }

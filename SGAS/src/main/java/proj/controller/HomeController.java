@@ -18,11 +18,6 @@ public class HomeController {
 	@Autowired
 	UsuarioRepository usuarioRepositorio;
 
-    private final ErrorController errorController;
-
-    HomeController(ErrorController errorController) {
-        this.errorController = errorController;
-    }
 	
 	@GetMapping
 	public String mostraPaginaInicial(Model model, Principal principal) {
@@ -39,18 +34,18 @@ public class HomeController {
 		return "index";
 	}
 
-	@GetMapping("login")
-	public String login() {
-		return "login";
-	}
-	
-	@GetMapping("erro")
-	public String erro() {
-		return "erro";
-	}
-	
-	@GetMapping("cadastro")
-	public String suco() {
-		return "cadastro";
-	}
+    @GetMapping("login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("erro")
+    public String erro() {
+        return "erro";
+    }
+
+    @GetMapping("cadastro")
+    public String suco() {
+        return "cadastro";
+    }
 }

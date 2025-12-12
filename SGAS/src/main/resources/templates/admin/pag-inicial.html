@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Amigo</title>
+
+    <title>Pet Amigo - Cadastrar</title>
     <link rel="stylesheet" href="/css/modelo.css">
     <link rel="shortcut icon" href="/images/iconesite.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
@@ -28,15 +29,17 @@
 			<div  sec:authorize="isAuthenticated() == false" >
 			   <a href="/login"><button class="log">Faça Login</button></a>
 			</div>    
+
     </header>
 
     <header id="header-1">
         <nav>
-            <a href="#">Home</a>
+            <a href="/administrador/pag-inicial">Home</a>
+
             <div class="dropdown">
-                <a href>Gestão de doações</a>
+                <a href="#">Gestão de doações</a>
                 <div class="dropdown-content">
-                    <a href="quero-adotar.html">Cadastrar doação</a>
+                    <a href="#">Cadastrar doação</a>
                     <a href="#">Ver doações</a>
                 </div>
             </div>
@@ -44,7 +47,8 @@
             <div class="dropdown">
                 <a href="#">Animais para adoção</a>
                 <div class="dropdown-content">
-                    <a href="cadastrar-animal.html">Cadastrar animal</a>
+                    <a href="/administrador/cadastrar-animal">Cadastrar animal</a>
+                    <a href="/administrador/listar-animais">Listar animais</a>
                 </div>
             </div>
 
