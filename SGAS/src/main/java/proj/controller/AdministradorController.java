@@ -22,7 +22,7 @@ import proj.service.CandidaturaServicoService;
 
 @Controller
 @RequestMapping("/administrador")
-public class SolicitacoesServicoController {
+public class AdministradorController {
 
 
 	@Autowired
@@ -30,6 +30,21 @@ public class SolicitacoesServicoController {
 	
 	@Autowired
 	UsuarioRepository usuarioRepositorio;
+	
+	@GetMapping
+	public String mostraPaginaInicialAdm(Model model, Principal principal) {
+		
+		Usuario u = null;
+		
+		if (principal != null)
+    	{
+    		u = usuarioRepositorio.findByEmail(principal.getName());
+    	}
+		
+		model.addAttribute("principal", u);
+
+		return "admin/pag-inicial";
+	}
 	
 	@GetMapping("/listacandidaturas")
 	public String mostraSolicitacoesServico(Model model, Principal principal, HttpServletRequest request) 
@@ -45,6 +60,8 @@ public class SolicitacoesServicoController {
     	{
     		u = usuarioRepositorio.findByEmail(principal.getName());
     		
+    		model.addAttribute("principal", u);
+    		
     		if (u == null) { // existe sessão mas sem usuario cadastrado
     			try{request.logout();}catch(Exception e) {} //remover a sessao.
     			System.out.println("SESSAO removida.");
@@ -57,7 +74,7 @@ public class SolicitacoesServicoController {
     	
 		
 		try {
-			List<CandidaturaServico> listaCandidaturas = candidaturaServicoService.listarTodos();
+			List<CandidaturaServico> listaCandidaturas = candidaturaServicoService.listarTodosPendendes();
 			
 			model.addAttribute("listaCandidaturas", listaCandidaturas);
 			

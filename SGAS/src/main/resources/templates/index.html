@@ -25,7 +25,10 @@
 	
 	
 	<ul sec:authorize="isAuthenticated()" >
-	    <span>logado!!</span>
+	    <button class="log" th:text="${principal.nome}"></button>
+		<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
+		<button class="log">Área do Administrador</button>
+		</a>
     </ul>
 	        
 	<div  sec:authorize="isAuthenticated() == false" >
