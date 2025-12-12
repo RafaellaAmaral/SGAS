@@ -24,34 +24,38 @@ import jakarta.servlet.http.HttpServletRequest;
 import proj.exception.BadRequestException;
 import proj.model.Animal;
 import proj.model.CandidaturaServico;
+import proj.model.Servico;
 import proj.model.SolicitacaoAdocao;
 import proj.model.Usuario;
 import proj.repository.UsuarioRepository;
 import proj.service.AnimalService;
 import proj.service.CandidaturaServicoService;
+import proj.service.ServicoService;
 import proj.service.SolicitacaoAdocaoService;
 
 @Controller
 @RequestMapping("/administrador")
 public class AdministradorController {
 
-
-	@Autowired
-	CandidaturaServicoService candidaturaServicoService;
-	
-	@Autowired
-	SolicitacaoAdocaoService solicitacaoAdocaoService;
-	
-	@Autowired
-	UsuarioRepository usuarioRepositorio;
-	
+    @Autowired
+    CandidaturaServicoService candidaturaServicoService;
+    
+    @Autowired
+    SolicitacaoAdocaoService solicitacaoAdocaoService;
+    
+    @Autowired
+    UsuarioRepository usuarioRepositorio;
+    
     @Autowired
     AnimalService animalService;
     
+    @Autowired
+    ServicoService servicoService;
+    
     @GetMapping
     public String mostraIndexAdmin(Model model, Principal principal, HttpServletRequest request) {
-    	
-    	Usuario u = null;
+        
+        Usuario u = null;
 
         if (principal != null) {
             u = usuarioRepositorio.findByEmail(principal.getName());
@@ -75,8 +79,8 @@ public class AdministradorController {
             model.addAttribute("listaCandidaturas", listaCandidaturas);
         } catch (Exception e) {
         }
-    	
-    	return "admin/pag-inicial";
+        
+        return "admin/pag-inicial";
     }
 
     @GetMapping("/listasolicitacoes")
@@ -176,7 +180,7 @@ public class AdministradorController {
 
     @GetMapping("/listar-animais")
     public String listarAnimais(Model model, Principal principal, HttpServletRequest request) {
-    	Usuario u = null;
+        Usuario u = null;
 
         if (principal != null) {
             u = usuarioRepositorio.findByEmail(principal.getName());
@@ -200,15 +204,15 @@ public class AdministradorController {
             model.addAttribute("listaCandidaturas", listaCandidaturas);
         } catch (Exception e) {
         }
-    	
+        
         model.addAttribute("animais", animalService.listarTodos());
         return "admin/listar-animais";
     }
 
     @GetMapping("/cadastrar-animal")
     public String cadastrarAnimalForm(Model model, Principal principal, HttpServletRequest request) {
-    	
-    	Usuario u = null;
+        
+        Usuario u = null;
 
         if (principal != null) {
             u = usuarioRepositorio.findByEmail(principal.getName());
@@ -240,8 +244,8 @@ public class AdministradorController {
             @RequestParam("sexo") String sexo,
             @RequestParam("imagem") MultipartFile imagem,
             RedirectAttributes redirectAttributes, Model model, Principal principal, HttpServletRequest request) {
-    	
-    	Usuario u = null;
+        
+        Usuario u = null;
 
         if (principal != null) {
             u = usuarioRepositorio.findByEmail(principal.getName());
@@ -291,8 +295,8 @@ public class AdministradorController {
 
     @GetMapping("/editar-animal/{id}")
     public String editarAnimalViaAdmin(@PathVariable("id") long id, Model model, Principal principal, HttpServletRequest request) {
-    	
-    	Usuario u = null;
+        
+        Usuario u = null;
 
         if (principal != null) {
             u = usuarioRepositorio.findByEmail(principal.getName());
@@ -345,4 +349,160 @@ public class AdministradorController {
 
         return "redirect:/administrador/listar-animais";
     }
+
+    @GetMapping("/listar-servicos")
+    public String listarServicos(Model model, Principal principal, HttpServletRequest request) {
+        Usuario u = null;
+
+        if (principal != null) {
+            u = usuarioRepositorio.findByEmail(principal.getName());
+            
+            model.addAttribute("principal", u);
+
+            if (u == null) {
+                try {
+                    request.logout();
+                } catch (Exception e) {
+                }
+            }
+        }
+
+        if (u == null || u.isAdministrador() == false) {
+            throw new BadRequestException("Usuário Administrador precisa estar logado.");
+        }
+
+        try {
+            List<CandidaturaServico> listaCandidaturas = candidaturaServicoService.listarTodosPendendes();
+            model.addAttribute("listaCandidaturas", listaCandidaturas);
+        } catch (Exception e) {
+        }
+        
+        model.addAttribute("servicos", servicoService.listarTodos());
+        return "admin/listar-servicos";
+    }
+
+    @GetMapping("/cadastrar-servico")
+    public String cadastrarServicoForm(Model model, Principal principal, HttpServletRequest request) {
+        
+        Usuario u = null;
+
+        if (principal != null) {
+            u = usuarioRepositorio.findByEmail(principal.getName());
+            
+            model.addAttribute("principal", u);
+
+            if (u == null) {
+                try {
+                    request.logout();
+                } catch (Exception e) {
+                }
+            }
+        }
+
+        if (u == null || u.isAdministrador() == false) {
+            throw new BadRequestException("Usuário Administrador precisa estar logado.");
+        }
+        
+        return "admin/cadastrar-servico";
+    }
+
+    @PostMapping("/cadastrar-servico")
+    public String cadastrarServico(
+            @RequestParam("titulo") String titulo,
+            @RequestParam("descricao") String descricao,
+            @RequestParam("tipo") String tipo,
+            @RequestParam("turno") String turno,
+            @RequestParam("vagas") int vagas,
+            @RequestParam("data") String dataStr,
+            RedirectAttributes redirectAttributes, Model model, Principal principal, HttpServletRequest request) {
+        
+        Usuario u = null;
+
+        if (principal != null) {
+            u = usuarioRepositorio.findByEmail(principal.getName());
+            
+            model.addAttribute("principal", u);
+
+            if (u == null) {
+                try {
+                    request.logout();
+                } catch (Exception e) {
+                }
+            }
+        }
+
+        if (u == null || u.isAdministrador() == false) {
+            throw new BadRequestException("Usuário Administrador precisa estar logado.");
+        }
+
+        Servico servico = new Servico();
+        servico.setTitulo(titulo);
+        servico.setDescricao(descricao);
+        servico.setTipo(tipo);
+        servico.setTurno(turno);
+        servico.setVagas(vagas);
+        servico.setData(LocalDate.parse(dataStr));
+
+        servicoService.inserir(servico);
+        redirectAttributes.addFlashAttribute("mensagem", "Serviço cadastrado com sucesso!");
+        return "redirect:/administrador/listar-servicos";
+    }
+
+    @GetMapping("/editar-servico/{id}")
+    public String editarServicoViaAdmin(@PathVariable("id") long id, Model model, Principal principal, HttpServletRequest request) {
+        
+        Usuario u = null;
+
+        if (principal != null) {
+            u = usuarioRepositorio.findByEmail(principal.getName());
+            
+            model.addAttribute("principal", u);
+
+            if (u == null) {
+                try {
+                    request.logout();
+                } catch (Exception e) {
+                }
+            }
+        }
+
+        if (u == null || u.isAdministrador() == false) {
+            throw new BadRequestException("Usuário Administrador precisa estar logado.");
+        }
+        
+        model.addAttribute("servico", servicoService.buscarPeloId(id));
+        return "admin/editar-servico";
+    }
+
+    @GetMapping("/remover-servico/{id}")
+    public String removerServicoViaAdmin(@PathVariable("id") long id) {
+        servicoService.excluir(id);
+        return "redirect:/administrador/listar-servicos";
+    }
+
+    @PostMapping("/editar-servico")
+    public String atualizarServicoViaAdmin(
+            @RequestParam("id") long id,
+            @RequestParam("titulo") String titulo,
+            @RequestParam("descricao") String descricao,
+            @RequestParam("tipo") String tipo,
+            @RequestParam("turno") String turno,
+            @RequestParam("vagas") int vagas,
+            @RequestParam("data") String dataStr) {
+
+        Servico servico = servicoService.buscarPeloId(id);
+
+        if (servico != null) {
+            servico.setTitulo(titulo);
+            servico.setDescricao(descricao);
+            servico.setTipo(tipo);
+            servico.setTurno(turno);
+            servico.setVagas(vagas);
+            servico.setData(LocalDate.parse(dataStr));
+            servicoService.alterar(servico);
+        }
+
+        return "redirect:/administrador/listar-servicos";
+    }
+    
 }

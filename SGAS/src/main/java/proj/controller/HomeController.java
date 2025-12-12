@@ -46,6 +46,6 @@ public class HomeController {
 
     @GetMapping("cadastro")
     public String suco() {
-        return "cadastro";
+        return "cadastro_usuario";
     }
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -27,13 +28,18 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+    
+	@Column(nullable = false, unique = true)
 	private String email;
-	
+
+	@Column(name = "nome", nullable = false)
 	private String nome;
-	
+
+	@com.fasterxml.jackson.annotation.JsonIgnore
+	@Column(name = "senha", nullable = false)
 	private String senha;
 	
+	@Column(name = "is_administrador", nullable = false)
 	private boolean isAdministrador = false;
 	
 //	@ManyToMany
