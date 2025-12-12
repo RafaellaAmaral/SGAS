@@ -1,0 +1,111 @@
+<!-- editar-animal.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Amigo - Editar</title>
+    <link rel="stylesheet" href="/SGAS/src/main/resources/static/css/cadastro-adm.css">
+</head>
+
+<body>
+    <header id="header-login">
+        <div class="logo">
+            <img src="/SGAS/src/main/resources/static/images/patas.png" alt="Logo de pata Pet Amigo">
+            <h1>Pet Amigo</h1>
+        </div>
+    </header>
+
+    <header id="header-1">
+        <nav>
+            <a href="#">Home</a>
+            <div class="dropdown">
+                <a href="#">Gestão de doações</a>
+                <div class="dropdown-content">
+                    <a href="quero-adotar.html">Cadastrar doação</a>
+                    <a href="#">Ver doações</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="#">Animais para adoção</a>
+                <div class="dropdown-content">
+                    <a href="/SGAS/src/main/resources/templates/admin/cadastrar-animal.html">Cadastrar animal</a>
+                    <a href="/SGAS/src/main/resources/templates/admin/listar-animais.html">Listar animais</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="#">Voluntários</a>
+                <div class="dropdown-content">
+                    <a href="#">Ver voluntário</a>
+                    <a href="#">Adicionar tarefa</a>
+                    <a href="#">Candidatos</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Editar animal</h2>
+
+            <form action="/admin/editar-animal" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" th:value="${animal.id}">
+
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" th:value="${animal.nome}" required>
+
+                <label for="raca">Raça:</label>
+                <input type="text" id="raca" name="raca" th:value="${animal.raca}">
+
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataNascimento" name="dataNascimento"
+                    th:value="${#dates.format(animal.dataNascimento, 'yyyy-MM-dd')}">
+
+                <label for="genero">Gênero:</label>
+                <select id="genero" name="sexo">
+                    <option value="0" th:selected="${animal.sexo == 0}">Fêmea</option>
+                    <option value="1" th:selected="${animal.sexo == 1}">Macho</option>
+                </select>
+
+                <label for="porte">Porte:</label>
+                <select id="porte" name="porte">
+                    <option value="0" th:selected="${animal.porte == 0}">Pequeno</option>
+                    <option value="1" th:selected="${animal.porte == 1}">Médio</option>
+                    <option value="2" th:selected="${animal.porte == 2}">Grande</option>
+                </select>
+
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" rows="4" th:text="${animal.descricao}"></textarea>
+
+                <label for="imagem">Imagem (novo arquivo opcional):</label>
+                <input type="file" id="imagem" name="imagem" accept="image/*">
+
+                <input type="submit" value="Salvar Alterações">
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="sobre">
+            <img src="/SGAS/src/main/resources/static/images/pata.png" alt="Ícone de pata">
+            <p>Lorem Ipsum is simply dummy text.</p>
+        </div>
+        <div class="qrcode">
+            <img src="/SGAS/src/main/resources/static/images/qrsgas.png" alt="QR Code" id="qr-code">
+            <button>SitePetAmigo.br</button>
+        </div>
+        <div class="contato">
+            <h3>Contato</h3>
+            <p><img src="/SGAS/src/main/resources/static/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+            <p><img src="/SGAS/src/main/resources/static/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+        </div>
+        <div class="coracao">
+            <img src="/SGAS/src/main/resources/static/images/transferir.webp" alt="Coração com pata">
+        </div>
+    </footer>
+</body>
+
+</html>

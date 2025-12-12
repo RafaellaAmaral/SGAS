@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Amigo - Animais</title>
+    <link rel="stylesheet" href="/css/cadastro-adm.css">
+</head>
+
+<body>
+	<header id="header-login">
+	        <div class="logo">
+				<a href="/">
+	            <img src="/images/patas.png" alt="Logo de pata Pet Amigo">
+				</a>
+	            <h1>Pet Amigo</h1>
+	        </div>
+			<ul sec:authorize="isAuthenticated()" >
+				    <button class="log" th:text="${principal.nome}"></button>
+					<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
+					<button class="log">Área do Administrador</button>
+					</a>
+			    </ul>
+				        
+				<div  sec:authorize="isAuthenticated() == false" >
+				   <a href="/login"><button class="log">Faça Login</button></a>
+				</div>    
+	    </header>
+		
+		<header id="header-1">
+		    <nav>
+		        <a href="/administrador">Home</a>
+		        <div class="dropdown">
+		            <a href>Gestão de doações</a>
+		            <div class="dropdown-content">
+		                <a href="quero-adotar.html">Cadastrar doação</a>
+		                <a href="#">Ver doações</a>
+		            </div>
+		        </div>
+
+		        <div class="dropdown">
+		            <a href="#">Animais para adoção</a>
+		            <div class="dropdown-content">
+		                <a href="/administrador/cadastrar-animal">Cadastrar animal</a>
+						<a href="/administrador/listasolicitacoes">Solicitações de Adoção</a>
+		            </div>
+		        </div>
+
+		        <div class="dropdown">
+		            <a href="#">Voluntários</a>
+		            <div class="dropdown-content">
+		                <a href="#">Adicionar tarefa</a>
+		                <a href="/administrador/listacandidaturas">Candidatos</a>
+		            </div>
+		        </div>
+		    </nav>
+		</header>
+
+    <main>
+        <div class="form-container">
+            <h2>Animais cadastrados</h2>
+
+            <table border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th>Imagem</th>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Raça</th>
+                        <th>Porte</th>
+                        <th>Sexo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="a : ${animais}">
+                        <td>
+                            <img th:if="${a.imagemUrl != null}" th:src="${a.imagemUrl}"
+                                width="100" alt="imagem">
+                        </td>
+
+                        <td th:text="${a.id}"></td>
+                        <td th:text="${a.nome}"></td>
+                        <td th:text="${a.raca}"></td>
+
+                        <td th:text="${a.porte == 'P' ? 'Pequeno' : (a.porte == 'M' ? 'Médio' : 'Grande')}"></td>
+
+                        <td th:text="${a.sexo == 'F' ? 'Fêmea' : 'Macho'}"></td>
+
+                        <td>
+                            <a th:href="@{'/administrador/editar-animal/' + ${a.id}}" class="btn editar">Editar</a> |
+                            <a th:href="@{'/administrador/remover-animal/' + ${a.id}}"
+                               onclick="return confirm('Tem certeza que deseja remover?')"
+                               class="btn remover">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <a href="/administrador/cadastrar-animal">Cadastrar novo animal</a>
+
+            <div th:if="${mensagem}" class="alert alert-success"
+                style="margin: 20px; padding: 10px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px;">
+                <p th:text="${mensagem}"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="sobre">
+            <img src="/images/pata.png" alt="Ícone de pata">
+            <p>Lorem Ipsum is simply dummy text.</p>
+        </div>
+
+        <div class="qrcode">
+            <img src="/images/qrsgas.png" alt="QR Code" id="qr-code">
+            <button>SitePetAmigo.br</button>
+        </div>
+
+        <div class="contato">
+            <h3>Contato</h3>
+            <p><img src="/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+            <p><img src="/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+        </div>
+
+        <div class="coracao">
+            <img src="/images/transferir.webp" alt="Coração com pata">
+        </div>
+    </footer>
+
+</body>
+</html>

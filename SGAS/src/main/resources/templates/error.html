@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-br" >
+	  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Amigo</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="shortcut icon" href="/images/iconesite.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header id="header-login">
+	
+      <div class="logo">
+    <a href="/">
+		  <img src="/images/patas.png" alt="Stylized paw print logo, centered and playful, representing the Pet Amigo brand in a welcoming and friendly website header">
+		  </a>
+      <h1>Pet Amigo</h1>
+    </div>  	
+	
+	
+	
+	
+	
+	
+  </header>
+
+  <header id="header-1"> 
+   <nav>
+	<img src="/images/error_icon.png">		
+		<p  th:text="${errorMessage}" ></p>
+  </nav>
+
+  </header>
+
+  <main>
+    <section class="banner">
+      <button class="seta esquerda" aria-label="Anterior">&#10094;</button>
+      <img src="images/banner-cachorros.jpg" alt="Banner de cachorro">
+      <button class="seta direita" aria-label="Próximo">&#10095;</button>
+    </section>
+</body>
+</html>
