@@ -25,7 +25,7 @@ INSERT INTO servico (id, vagas, data, descricao, tipo, titulo, turno)
 VALUES 
 (1,2,'2025-12-18','dar banho','limpeza','Banho','manhã'),
 (2,5,'2026-01-05','tosar animais','cuidado','Tosa','tarde'),
-(3,5,'2025-12-15','gerenciar finanças','financeiro','caixa','tarde'),
+(3,5,'2025-12-15','gerenciar finanças','financeiro','Caixa','tarde'),
 (4,5,'2025-12-25','cortar unhas dos animais','cuidado','Cortar unhas','manhã')
 ;
 

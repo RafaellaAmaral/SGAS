@@ -20,7 +20,7 @@ public class SolicitacoesAdocaoController {
 	@Autowired
 	SolicitacaoAdocaoService SolicitacaoAdocaoService;
 
-	@GetMapping("/listasolicitacoes")
+/*	@GetMapping("/listasolicitacoes")
 	public String mostraSolicitacoesAdocao(Model model, Principal principal) throws SQLException {
 
 		System.out.println("✅ ENTROU NO CONTROLLER /listasolicitacoes");
@@ -30,7 +30,7 @@ public class SolicitacoesAdocaoController {
 		model.addAttribute("listaSolicitacoes", listaSolicitacoes);
 		
 		return "solicitacoes-trabalho";
-	}
+	} */
 
 	/*
 	 * @PostMapping("/aprovar/{id}") public String aprovar(@PathVariable long id) {
