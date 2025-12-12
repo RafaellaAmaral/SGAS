@@ -4,21 +4,21 @@ const gatos = [
     genero: "femea",
     porte: "medio",
     descricao: "Muito carinhosa e adora brincar.",
-    imagem: "/SGAS/src/main/resources/static/images/thor-mock.jpg"
+    imagem: "/images/thor-mock.jpg"
   },
   {
     nome: "Luna",
     genero: "femea",
     porte: "medio",
     descricao: "Cheia de energia e curiosporte.",
-    imagem: "/SGAS/src/main/resources/static/images/luna-mock.webp"
+    imagem: "/images/luna-mock.webp"
   },
   {
     nome: "Thor",
     genero: "macho",
     porte: "grande",
     descricao: "Calmo, dócil e muito companheiro.",
-    imagem: "/SGAS/src/main/resources/static/images/pipa-mock.jpg"
+    imagem: "/images/pipa-mock.jpg"
   }
 ]
 
@@ -28,21 +28,21 @@ const caes = [
     genero: "macho",
     tamanho: "grande",
     descricao: "Muito protetor e leal.",
-    imagem: "/SGAS/src/main/resources/static/images/rex-mock.webp"
+    imagem: "/images/rex-mock.webp"
   },
   {
     nome: "Mel",
     genero: "femea",
     tamanho: "medio",
     descricao: "Dócil, brincalhona e carinhosa.",
-    imagem: "/SGAS/src/main/resources/static/images/mel-mock.webp"
+    imagem: "/images/mel-mock.webp"
   },
   {
     nome: "Tobi Uchiha",
     genero: "macho",
     tamanho: "pequeno",
     descricao: "Companheiro, alegre e esperto.",
-    imagem:  "/SGAS/src/main/resources/static/images/tobi-mock.webp"
+    imagem:  "/images/tobi-mock.webp"
   }
 ]
 

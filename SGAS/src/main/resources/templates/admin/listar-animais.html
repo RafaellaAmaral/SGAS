@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Amigo - Animais</title>
-    <link rel="stylesheet" href="/SGAS/src/main/resources/static/css/cadastro-adm.css">
+    <link rel="stylesheet" href="/css/cadastro-adm.css">
 </head>
 
 <body>
     <header id="header-login">
         <div class="logo">
-            <img src="/SGAS/src/main/resources/static/images/patas.png" alt="Logo de pata Pet Amigo">
+            <img src="/images/patas.png" alt="Logo de pata Pet Amigo">
             <h1>Pet Amigo</h1>
         </div>
     </header>
@@ -31,8 +31,9 @@
             <div class="dropdown">
                 <a href="#">Animais para adoção</a>
                 <div class="dropdown-content">
-                    <a href="/SGAS/src/main/resources/templates/admin/cadastrar-animal.html">Cadastrar animal</a>
-                    <a href="/SGAS/src/main/resources/templates/admin/listar-animais.html">Listar animais</a>
+                    <a href="/administrador/cadastrar-animal">Cadastrar animal</a>
+                    <a href="/administrador/listar-animais">Listar animais</a>
+
                 </div>
             </div>
 
@@ -66,7 +67,8 @@
                 <tbody>
                     <tr th:each="a : ${listaAnimais}">
                         <td>
-                            <img th:if="${a.imagemURL != null}" th:src="'data:image/jpeg;base64,' + ${a.imagemURL}" width="100" alt="imagem">
+                            <img th:if="${a.imagemURL != null}" th:src="'data:image/jpeg;base64,' + ${a.imagemURL}"
+                                width="100" alt="imagem">
                         </td>
                         <td th:text="${a.id}"></td>
                         <td th:text="${a.nome}"></td>
@@ -74,36 +76,38 @@
                         <td th:text="${a.porte == 0 ? 'Pequeno' : (a.porte == 1 ? 'Médio' : 'Grande')}"></td>
                         <td th:text="${a.sexo == 0 ? 'Fêmea' : 'Macho'}"></td>
                         <td>
-                        <a th:href="@{'/SGAS/src/main/resources/templates/admin/editar-animal.html' + ${animal.id}}" class="btn editar">Editar</a> |
-                        <a th:href="@{'/admin/remover-animal/' + ${animal.id}}"
-                           onclick="return confirm('Tem certeza que deseja remover?')" class="btn remover">Excluir</a>
-                    </td>
+                            <a th:href="@{'/admin/editar-animal.html' + ${animal.id}}" class="btn editar">Editar</a> |
+                            <a th:href="@{'/admin/remover-animal/' + ${animal.id}}"
+                                onclick="return confirm('Tem certeza que deseja remover?')"
+                                class="btn remover">Excluir</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
 
             <br>
-            <a href="/SGAS/src/main/resources/templates/admin/cadastrar-animal.html">Cadastrar novo animal</a>
+            <a href="/admin/cadastrar-animal.html">Cadastrar novo animal</a>
         </div>
     </main>
 
     <footer>
         <div class="sobre">
-            <img src="/SGAS/src/main/resources/static/images/pata.png" alt="Ícone de pata">
+            <img src="/images/pata.png" alt="Ícone de pata">
             <p>Lorem Ipsum is simply dummy text.</p>
         </div>
         <div class="qrcode">
-            <img src="/SGAS/src/main/resources/static/images/qrsgas.png" alt="QR Code" id="qr-code">
+            <img src="/images/qrsgas.png" alt="QR Code" id="qr-code">
             <button>SitePetAmigo.br</button>
         </div>
         <div class="contato">
             <h3>Contato</h3>
-            <p><img src="/SGAS/src/main/resources/static/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
-            <p><img src="/SGAS/src/main/resources/static/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+            <p><img src="/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+            <p><img src="/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
         </div>
         <div class="coracao">
-            <img src="/SGAS/src/main/resources/static/images/transferir.webp" alt="Coração com pata">
+            <img src="/images/transferir.webp" alt="Coração com pata">
         </div>
     </footer>
 </body>
+
 </html>
