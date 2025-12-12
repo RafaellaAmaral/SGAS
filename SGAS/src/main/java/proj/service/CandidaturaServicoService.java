@@ -56,9 +56,9 @@ public class CandidaturaServicoService {
 	    candidaturaServicoRepository.save(c);
 	}
 
-	public void negar(long usuarioId, long servicoId) {
+	public void recusar(long usuarioId, long servicoId) {
 	    CandidaturaServico c = candidaturaServicoRepository.findById_UsuarioIdAndId_ServicoId(usuarioId, servicoId).orElseThrow();
-	    c.setStatus("negada");
+	    c.setStatus("recusada");
 	    candidaturaServicoRepository.save(c);
 	}
 	

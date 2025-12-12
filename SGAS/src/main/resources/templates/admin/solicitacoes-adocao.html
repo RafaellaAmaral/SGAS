@@ -59,7 +59,6 @@
 		        </div>
 		    </nav>
 		</header>
-
 <!--	<nav>
 		<p id="nome-no-portal" th:text="${nome}"></p>
 	    <a href="/aluno/perfil" class="icone" id="icone-pesquisa-aluno">
@@ -72,21 +71,21 @@
 		
         <section class="candidaturas-list">
             <div class="candidaturas-container">
-                <article class="candidaturas-card" th:each="candidatura : ${listaCandidaturas}">
-					<h2 th:text="'Serviço: ' + ${candidatura.servico.titulo}"></h2>
-                    <h2 th:text="'Voluntário: ' + ${candidatura.usuario.nome}"></h2>
-					<p th:text="'Data: ' + ${candidatura.dataCandidatura}"></p>
-                    <p th:text="'Status: ' + ${candidatura.status}"></p>
+                <article class="candidaturas-card" th:each="solicitacao : ${listaSolicitacoes}">
+					<h2 th:text="'Animal: ' + ${solicitacao.animal.nome}"></h2>
+                    <h2 th:text="'Candidato: ' + ${solicitacao.usuario.nome}"></h2>
+					<p th:text="'Data: ' + ${solicitacao.dataSolicitacao}"></p>
+                    <p th:text="'Status: ' + ${solicitacao.status}"></p>
  <!--                  <div class="tags">
                         <span th:text="${aluno.curso}"></span>
                         <span th:text="${aluno.periodo}"></span>
                     </div> --> 
-					<div class="botoes-aprovar-recusar" th:if="${candidatura.status == 'pendente'}">
-					<form th:action="@{'/administrador/listacandidaturas/aprovar/' + ${candidatura.usuario.id} + '/' + ${candidatura.servico.id}}" method="post">
+					<div class="botoes-aprovar-recusar" th:if="${solicitacao.status == 'pendente'}">
+					<form th:action="@{'/administrador/listasolicitacoes/aprovar/' + ${solicitacao.usuario.id} + '/' + ${solicitacao.animal.id}}" method="post">
 					        <button type="submit">✅ Aprovar</button>
 					    </form>
 
-					<form th:action="@{'/administrador/listacandidaturas/recusar/' + ${candidatura.usuario.id} + '/' + ${candidatura.servico.id}}" method="post">
+					<form th:action="@{'/administrador/listasolicitacoes/aprovar/' + ${solicitacao.usuario.id} + '/' + ${solicitacao.animal.id}}" method="post">
 					        <button type="submit">❌ Recusar</button>
 				    </form>
 					</div>

@@ -1,10 +1,12 @@
 package proj.service;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import proj.model.CandidaturaServico;
 import proj.model.SolicitacaoAdocao;
 import proj.repository.SolicitacaoAdocaoRepository;
 
@@ -18,6 +20,17 @@ public class SolicitacaoAdocaoService {
 		
 		List<SolicitacaoAdocao> listaCandidaturas = solicitacaoAdocaoRepository.findAll();
 		return listaCandidaturas;
+	}
+	
+	public List<SolicitacaoAdocao> listarTodosPendendes() {
+
+	    List<SolicitacaoAdocao> listaSolicitacoes = solicitacaoAdocaoRepository.findAll();
+
+	    listaSolicitacoes.sort(Comparator.comparing(
+	        c -> !c.getStatus().equalsIgnoreCase("pendente")
+	    ));
+
+	    return listaSolicitacoes;
 	}
 	
 	public void inserir(SolicitacaoAdocao c) {
@@ -36,5 +49,17 @@ public class SolicitacaoAdocaoService {
 	
 	public SolicitacaoAdocao buscarPeloId(long id) {
 		return solicitacaoAdocaoRepository.getById(id);
+	}
+	
+	public void aprovar(long usuarioId, long animalId) {
+	    SolicitacaoAdocao s = solicitacaoAdocaoRepository.findById_UsuarioIdAndId_AnimalId(usuarioId, animalId).orElseThrow();
+	    s.setStatus("aprovada");
+	    solicitacaoAdocaoRepository.save(s);
+	}
+
+	public void recusar(long usuarioId, long animalId) {
+		SolicitacaoAdocao s = solicitacaoAdocaoRepository.findById_UsuarioIdAndId_AnimalId(usuarioId, animalId).orElseThrow();
+	    s.setStatus("recusada");
+	    solicitacaoAdocaoRepository.save(s);
 	}
 }
