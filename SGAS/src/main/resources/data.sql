@@ -13,13 +13,12 @@ VALUES
 
 
 
-INSERT INTO animal (id, porte, sexo, data_nascimento,  descricao, imagem_url, nome, raca) 
+INSERT INTO animal (porte, sexo, data_nascimento, descricao, imagem_url, nome, raca) 
 VALUES 
-(1,'P','M','2025-06-01','Muito novo','url1','tico','pincher'),
-(2,'M','F','2024-11-21','Muito arisco','url2','diana','vira-lata'),
-(3,'G','M','2025-02-14','Muito esperto','url3','lampiao','labrador'),
-(4,'M','F','2024-08-25','Muito chata','url2','lola','indefinida')
-;
+('P', 'M', '2025-06-01', 'Muito novo', 'url1', 'tico', 'pincher'),
+('M', 'F', '2024-11-21', 'Muito arisco', 'url2', 'diana', 'vira-lata'),
+('G', 'M', '2025-02-14', 'Muito esperto', 'url3', 'lampiao', 'labrador'),
+('M', 'F', '2024-08-25', 'Muito chata', 'url2', 'lola', 'indefinida');
 
 
 INSERT INTO servico (id, vagas, data, descricao, tipo, titulo, turno) 

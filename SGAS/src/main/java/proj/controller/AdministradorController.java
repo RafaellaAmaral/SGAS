@@ -1,5 +1,9 @@
 package proj.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import proj.exception.BadRequestException;
@@ -47,21 +53,16 @@ public class AdministradorController {
             if (u == null) {
                 try {
                     request.logout();
-                } catch (Exception e) {
-                }
+                } catch (Exception e) {}
             }
         }
 
-        if (u == null || u.isAdministrador() == false) {
+        if (u == null || !u.isAdministrador()) {
             throw new BadRequestException("Usuário Administrador precisa estar logado.");
         }
 
-        try {
-            List<CandidaturaServico> listaCandidaturas = candidaturaServicoService.listarTodos();
-            model.addAttribute("listaCandidaturas", listaCandidaturas);
-        } catch (Exception e) {
-        }
-
+        List<CandidaturaServico> listaCandidaturas = candidaturaServicoService.listarTodos();
+        model.addAttribute("listaCandidaturas", listaCandidaturas);
         return "admin/solicitacoes-trabalho";
     }
 
@@ -77,7 +78,8 @@ public class AdministradorController {
     }
 
     @GetMapping("/listar-animais")
-    public String listarAnimais() {
+    public String listarAnimais(Model model) {
+        model.addAttribute("animais", animalService.listarTodos());
         return "admin/listar-animais";
     }
 
@@ -93,10 +95,11 @@ public class AdministradorController {
             @RequestParam("idade") int idade,
             @RequestParam("porte") String porte,
             @RequestParam("descricao") String descricao,
-            @RequestParam("sexo") String sexo) {
+            @RequestParam("sexo") String sexo,
+            @RequestParam("imagem") MultipartFile imagem,
+            RedirectAttributes redirectAttributes) {
 
         Animal animal = new Animal();
-
         animal.setNome(nome);
         animal.setRaca(raca);
         animal.setDescricao(descricao);
@@ -104,8 +107,24 @@ public class AdministradorController {
         animal.setSexo(sexo);
         animal.setDataNascimento(LocalDate.now().minusYears(idade));
 
-        animalService.inserir(animal);
+        String imageUrl = "";
 
+        if (imagem != null && !imagem.isEmpty()) {
+            try {
+                String uploadDir = "src/main/resources/static/images/animais/";
+                Files.createDirectories(Paths.get(uploadDir));
+                Path caminho = Paths.get(uploadDir + imagem.getOriginalFilename());
+                Files.copy(imagem.getInputStream(), caminho, StandardCopyOption.REPLACE_EXISTING);
+                imageUrl = "/images/animais/" + imagem.getOriginalFilename();
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("erro", "Erro ao fazer upload da imagem.");
+                return "redirect:/administrador/cadastrar-animal";
+            }
+        }
+
+        animal.setImagemUrl(imageUrl);
+        animalService.inserir(animal);
+        redirectAttributes.addFlashAttribute("mensagem", "Animal cadastrado com sucesso!");
         return "redirect:/administrador/listar-animais";
     }
 
@@ -145,5 +164,4 @@ public class AdministradorController {
 
         return "redirect:/administrador/listar-animais";
     }
-
 }
