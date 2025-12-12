@@ -230,7 +230,7 @@ public class AdministradorController {
         return "admin/cadastrar-animal";
     }
 
-    @PostMapping("/cadastrar-animal")
+    @PostMapping("/cadastrar-animal2")
     public String cadastrarAnimal(
             @RequestParam("nome") String nome,
             @RequestParam("raca") String raca,
@@ -279,14 +279,14 @@ public class AdministradorController {
                 imageUrl = "/images/animais/" + imagem.getOriginalFilename();
             } catch (Exception e) {
                 redirectAttributes.addFlashAttribute("erro", "Erro ao fazer upload da imagem.");
-                return "redirect:/admin/cadastrar-animal";
+                return "redirect:/administrador/cadastrar-animal";
             }
         }
 
         animal.setImagemUrl(imageUrl);
         animalService.inserir(animal);
         redirectAttributes.addFlashAttribute("mensagem", "Animal cadastrado com sucesso!");
-        return "redirect:/admin/listar-animais";
+        return "redirect:/administrador/listar-animais";
     }
 
     @GetMapping("/editar-animal/{id}")
@@ -318,7 +318,7 @@ public class AdministradorController {
     @GetMapping("/remover-animal/{id}")
     public String removerAnimalViaAdmin(@PathVariable("id") long id) {
         animalService.excluir(id);
-        return "redirect:/admin/listar-animais";
+        return "redirect:/administrador/listar-animais";
     }
 
     @PostMapping("/editar-animal")
