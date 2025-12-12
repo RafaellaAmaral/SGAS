@@ -33,12 +33,13 @@ import proj.service.CandidaturaServicoService;
 @RequestMapping("/administrador")
 public class AdministradorController {
 
-    @Autowired
-    CandidaturaServicoService candidaturaServicoService;
 
-    @Autowired
-    UsuarioRepository usuarioRepositorio;
-
+	@Autowired
+	CandidaturaServicoService candidaturaServicoService;
+	
+	@Autowired
+	UsuarioRepository usuarioRepositorio;
+	
     @Autowired
     AnimalService animalService;
 
@@ -53,16 +54,21 @@ public class AdministradorController {
             if (u == null) {
                 try {
                     request.logout();
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             }
         }
 
-        if (u == null || !u.isAdministrador()) {
+        if (u == null || u.isAdministrador() == false) {
             throw new BadRequestException("Usuário Administrador precisa estar logado.");
         }
 
-        List<CandidaturaServico> listaCandidaturas = candidaturaServicoService.listarTodos();
-        model.addAttribute("listaCandidaturas", listaCandidaturas);
+        try {
+            List<CandidaturaServico> listaCandidaturas = candidaturaServicoService.listarTodos();
+            model.addAttribute("listaCandidaturas", listaCandidaturas);
+        } catch (Exception e) {
+        }
+
         return "admin/solicitacoes-trabalho";
     }
 

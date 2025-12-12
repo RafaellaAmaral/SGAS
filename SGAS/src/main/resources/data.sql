@@ -4,11 +4,11 @@ SET TimeZone TO 'America/Sao_Paulo'
 
 INSERT INTO usuario (id, email, nome, is_administrador, senha) 
 VALUES 
-(1,'admin@gmail.com','admin',true, ENCODE(sha512('123'), 'hex')),
-(2,'caio@gmail.com','caio',false,  ENCODE(sha512('123'), 'hex')),
-(3,'joao@gmail.com','joao',false,  ENCODE(sha512('123'), 'hex')),
-(4,'maria@gmail.com','maria',false,  ENCODE(sha512('123'), 'hex')),
-(5,'ana@gmail.com','ana',false,  ENCODE(sha512('123'), 'hex'))
+(1,'admin@gmail.com','Admin',true, ENCODE(sha512('123'), 'hex')),
+(2,'caio@gmail.com','Caio',false,  ENCODE(sha512('123'), 'hex')),
+(3,'joao@gmail.com','João',false,  ENCODE(sha512('123'), 'hex')),
+(4,'maria@gmail.com','Maria',false,  ENCODE(sha512('123'), 'hex')),
+(5,'ana@gmail.com','Ana',false,  ENCODE(sha512('123'), 'hex'))
 ;
 
 

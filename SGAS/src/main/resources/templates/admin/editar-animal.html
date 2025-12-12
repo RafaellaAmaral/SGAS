@@ -9,12 +9,24 @@
 </head>
 
 <body>
-<header id="header-login">
-    <div class="logo">
-        <img src="/images/patas.png" alt="Logo de pata Pet Amigo">
-        <h1>Pet Amigo</h1>
-    </div>
-</header>
+    <header id="header-login">
+        <div class="logo">
+            <img src="/images/patas.png" alt="Logo de pata Pet Amigo">
+            <h1>Pet Amigo</h1>
+        </div>
+		
+		<ul sec:authorize="isAuthenticated()" >
+			    <button class="log" th:text="${principal.nome}"></button>
+				<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
+				<button class="log">Área do Administrador</button>
+				</a>
+		    </ul>
+			        
+			<div  sec:authorize="isAuthenticated() == false" >
+			   <a href="/login"><button class="log">Faça Login</button></a>
+			</div>    
+			
+    </header>
 
 <header id="header-1">
     <nav>

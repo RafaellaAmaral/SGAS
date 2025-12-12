@@ -269,3 +269,97 @@ footer img {
 .dropdown:hover .dropdown-content {
   display: flex;
 }
+
+/* ======== LISTA DE CANDIDATURAS ======== */
+
+.candidaturas-list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.candidaturas-container {
+    width: 80%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ======== CARD ======== */
+
+.candidaturas-card {
+    background: #e0f7ff; /* Azul bem clarinho */
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    text-align: center;
+    font-family: 'Fredoka One', sans-serif;
+    color: #0b2a68;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.candidaturas-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.candidaturas-card h2 {
+    margin: 8px 0;
+    font-size: 24px;
+}
+
+.candidaturas-card p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* ======== BOTÕES ======== */
+
+.candidaturas-card form {
+    margin: 5px 0;
+}
+
+.candidaturas-card button {
+    padding: 10px 22px;
+    font-size: 16px;
+    font-family: 'Fredoka One', sans-serif;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+/* Botão Aprovar */
+.candidaturas-card form:first-of-type button {
+    background: #3ee68a;    /* Verde suave */
+    color: #0c3d21;
+}
+
+.candidaturas-card form:first-of-type button:hover {
+    background: #33c877;
+}
+
+/* Botão Negar */
+.candidaturas-card form:last-of-type button {
+    background: #ff6b6b;    /* Vermelho suave */
+    color: white;
+}
+
+.candidaturas-card form:last-of-type button:hover {
+    background: #e84f4f;
+}
+
+/* ======== RESPONSIVIDADE ======== */
+
+@media (max-width: 600px) {
+    .candidaturas-container {
+        width: 95%;
+    }
+
+    .candidaturas-card h2 {
+        font-size: 20px;
+    }
+}
+

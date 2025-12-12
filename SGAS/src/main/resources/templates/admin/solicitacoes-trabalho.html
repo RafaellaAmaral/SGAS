@@ -1,19 +1,72 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Amigo</title>
-	<link rel="stylesheet" href="../static/css/index.css"> 
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-br" >
+	  <head>
+	      <meta charset="UTF-8">
+	      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	      <title>Pet Amigo</title>
+	      <link rel="stylesheet" href="/css/modelo.css">
+	      <link rel="shortcut icon" href="/images/iconesite.png" type="image/x-icon">
+	      <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+	  </head>
 <body>
 	<header id="header-login">
-	      <div class="logo">
-	      <img src="../static/images/patas.png" alt="Stylized paw print logo, centered and playful, representing the Pet Amigo brand in a welcoming and friendly website header">
-	      <h1>Pet Amigo</h1>
-	    </div>
-	  </header>
+	        <div class="logo">
+				<a href="/">
+	            <img src="/images/patas.png" alt="Logo de pata Pet Amigo">
+				</a>
+	            <h1>Pet Amigo</h1>
+	        </div>
+			<ul sec:authorize="isAuthenticated()" >
+				    <button class="log" th:text="${principal.nome}"></button>
+					<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
+					<button class="log">Área do Administrador</button>
+					</a>
+			    </ul>
+				        
+				<div  sec:authorize="isAuthenticated() == false" >
+				   <a href="/login"><button class="log">Faça Login</button></a>
+				</div>    
+	    </header>
+		
+		<header id="header-1">
+		    <nav>
+		        <a href="#">Home</a>
+		        <div class="dropdown">
+		            <a href>Gestão de doações</a>
+		            <div class="dropdown-content">
+		                <a href="quero-adotar.html">Cadastrar doação</a>
+		                <a href="#">Ver doações</a>
+		            </div>
+		        </div>
+
+		        <div class="dropdown">
+		            <a href="#">Animais para adoção</a>
+		            <div class="dropdown-content">
+		                <a href="cadastrar-animal.html">Cadastrar animal</a>
+		            </div>
+		        </div>
+
+		        <div class="dropdown">
+		            <a href="#">Voluntários</a>
+		            <div class="dropdown-content">
+		                <a href="#">Ver voluntário</a>
+		                <a href="#">Adicionar tarefa</a>
+		                <a href="#">Candidatos</a>
+		            </div>
+		        </div>
+				
+				<div class="dropdown">
+				                <a href="#">Aprovações</a>
+				                <div class="dropdown-content">
+				                    <a href="/administrador/listacandidaturas">Candidaturas de Serviço</a>
+				                    <a href="#">Solicitações de Adoção</a>
+				                </div>
+				</div>
+		    </nav>
+		</header>
 
 <!--	<nav>
 		<p id="nome-no-portal" th:text="${nome}"></p>
@@ -28,14 +81,15 @@
         <section class="candidaturas-list">
             <div class="candidaturas-container">
                 <article class="candidaturas-card" th:each="candidatura : ${listaCandidaturas}">
-                    <h2 th:text="${candidatura.usuario.id}"></h2>
-					<h2 th:text="${candidatura.servico.id}"></h2>
+                    <h2 th:text="${candidatura.usuario.nome}"></h2>
+					<h2 th:text="${candidatura.servico.titulo}"></h2>
+					<h2 th:text="${candidatura.dataCandidatura}"></h2>
                     <p th:text="${candidatura.status}"></p>
  <!--                  <div class="tags">
                         <span th:text="${aluno.curso}"></span>
                         <span th:text="${aluno.periodo}"></span>
                     </div> --> 
-					
+					<div class="botoes-aprovar-recusar" th:if="${candidatura.status == 'pendente'}">
 					<form th:action="@{'/administrador/aprovar/' + ${candidatura.usuario.id} + '/' + ${candidatura.servico.id}}" method="post">
 					        <button type="submit">✅ Aprovar</button>
 					    </form>
@@ -43,11 +97,31 @@
 					<form th:action="@{'/administrador/negar/' + ${candidatura.usuario.id} + '/' + ${candidatura.servico.id}}" method="post">
 					        <button type="submit">❌ Negar</button>
 				    </form>
+					</div>
                 </article>
             </div>
         </section>
 		
     </main>
+	
+	<footer>
+	       <div class="sobre">
+	           <img src="/images/pata.png" alt="Ícone de pata">
+	           <p>Lorem Ipsum is simply dummy text.</p>
+	       </div>
+	       <div class="qrcode">
+	           <img src="/images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+	           <button>SitePetAmigo.br</button>
+	       </div>
+	       <div class="contato">
+	           <h3>Contato</h3>
+	           <p><img src="/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+	           <p><img src="/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+	       </div>
+	       <div class="coracao">
+	           <img src="/images/transferir.webp" alt="Coração com pata">
+	       </div>
+	   </footer>
 	
 </body>
 </html>

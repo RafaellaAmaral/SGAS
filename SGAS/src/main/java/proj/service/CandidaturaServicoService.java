@@ -1,6 +1,7 @@
 package proj.service;
 
 import java.util.List;
+import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,17 @@ public class CandidaturaServicoService {
 		
 		List<CandidaturaServico> listaCandidaturas = candidaturaServicoRepository.findAll();
 		return listaCandidaturas;
+	}
+	
+	public List<CandidaturaServico> listarTodosPendendes() {
+
+	    List<CandidaturaServico> listaCandidaturas = candidaturaServicoRepository.findAll();
+
+	    listaCandidaturas.sort(Comparator.comparing(
+	        c -> !c.getStatus().equalsIgnoreCase("pendente")
+	    ));
+
+	    return listaCandidaturas;
 	}
 	
 	public void inserir(CandidaturaServico c) {
@@ -40,13 +52,13 @@ public class CandidaturaServicoService {
 	
 	public void aprovar(long usuarioId, long servicoId) {
 	    CandidaturaServico c = candidaturaServicoRepository.findById_UsuarioIdAndId_ServicoId(usuarioId, servicoId).orElseThrow();
-	    c.setStatus("APROVADA");
+	    c.setStatus("aprovada");
 	    candidaturaServicoRepository.save(c);
 	}
 
 	public void negar(long usuarioId, long servicoId) {
 	    CandidaturaServico c = candidaturaServicoRepository.findById_UsuarioIdAndId_ServicoId(usuarioId, servicoId).orElseThrow();
-	    c.setStatus("NEGADA");
+	    c.setStatus("negada");
 	    candidaturaServicoRepository.save(c);
 	}
 	
