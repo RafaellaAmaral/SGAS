@@ -1,0 +1,33 @@
+
+--------------------------------
+#### Postgres via DOCKER
+
+# Opção 1) Execução no host
+docker run --name my-postgres --network host -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=SGAS -v pg_data:/var/lib/postgresql  postgres:latest
+docker run --name my-pgadmin  --network host -e PGADMIN_DEFAULT_EMAIL=root@gmail.com -e PGADMIN_DEFAULT_PASSWORD=postgres dpage/pgadmin4
+
+# Opão 2) Criar uma rede e interconectar
+docker network create --driver bridge my-network
+docker network ls
+docker run --name my-postgres --network my-network -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=SGAS -v pg_data:/var/lib/postgresql  postgres:latest
+docker run --name my-pgadmin --network my-network -p 15432:80 -e PGADMIN_DEFAULT_EMAIL=root@gmail.com -e PGADMIN_DEFAULT_PASSWORD=postgres dpage/pgadmin4
+
+--------------------------------
+C:\Users\Claudio\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+
+# Doc: https://learn.microsoft.com/pt-br/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.4
+# Doc New-Alias: https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/new-alias?view=powershell-7.4
+# ex:
+New-Alias tt ls 
+function opt1 {Get-ChildItem -Force}
+New-Alias -Name ll -Value opt1
+
+------------------------------------------
+
+
+postgress vs mysql
+docker
+aplication.properties
+modelagem many-to-many e many-to-one
+lombock
+modelo java

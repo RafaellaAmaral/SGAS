@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-br" >
+	  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Amigo</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="shortcut icon" href="/images/iconesite.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header id="header-login">
+      <div class="logo">
+      <img src="/images/patas.png" alt="Stylized paw print logo, centered and playful, representing the Pet Amigo brand in a welcoming and friendly website header">
+      <h1>Pet Amigo</h1>
+    </div>
+	
+	
+	
+    
+	
+	
+	<ul sec:authorize="isAuthenticated()" >
+	    <button class="log" th:text="${principal.nome}"></button>
+		<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
+		<button class="log">Área do Administrador</button>
+		</a>
+		
+		<a href="/usuario"  th:if="${principal != null && principal.isAdministrador == false}">
+				<button class="log">Área do Usuário</button>
+				</a>
+    </ul>
+	        
+	<div  sec:authorize="isAuthenticated() == false" >
+	   <a href="/login"><button class="log">Faça Login</button></a>
+	</div>    	
+	
+	
+	
+	
+	
+  </header>
+
+  <header id="header-1"> 
+   <nav>
+    <a href="#">Home</a>
+    <div class="dropdown">
+      <a href="quero-adotar.html">Quero adotar</a>
+      <div class="dropdown-content">
+        <a href="quero-adotar.html">Adote</a>
+        <a href="#">Animais curtidos</a>
+      </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Forma de ajudar</a>
+        <div class="dropdown-content">
+          <a href="#"> Faça uma Doação</a>
+           <a href="voluntarios.html">Seja voluntário</a>
+        </div>
+
+      </div>
+    <a href="#">Fale conosco</a>
+    <button class="doacao">Faça uma doação</button>
+  </nav>
+
+  </header>
+
+  <main>
+    <section class="banner">
+      <button class="seta esquerda" aria-label="Anterior">&#10094;</button>
+      <img src="images/banner-cachorros.jpg" alt="Banner de cachorro">
+      <button class="seta direita" aria-label="Próximo">&#10095;</button>
+       <a href="quero-adotar.html"><button class="btn-adote">Adote</button></a>
+    </section>
+
+    <section class="historia">
+      <img src="images/13be2e788b6f8f3fb80e67c2f2663615.jpg" alt="Cachorro da história">
+      <div class="texto">
+        <h2>Nossa história</h2>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <strong>1500s</strong>, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+        </p>
+      </div>
+    </section>
+
+    <section class="filtro">
+      <form>
+        <div class="campo">
+          <label for="tamanho">Tamanho do Cachorro:</label>
+          <select id="tamanho" name="tamanho">
+            <option value="">Selecione</option>
+            <option value="pequeno">Pequeno</option>
+            <option value="medio">Médio</option>
+            <option value="grande">Grande</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="genero">Gênero:</label>
+          <select id="genero" name="genero">
+            <option value="">Selecione</option>
+            <option value="macho">Macho</option>
+            <option value="femea">Fêmea</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-filtro">Encontrar usando filtro</button>
+      </form>
+    </section>
+  </main>
+    <footer>
+        <div class="sobre">
+            <img src="images/pata.png" alt="Ícone de pata">
+            <p>Lorem Ipsum is simply dummy text.</p>
+        </div>
+        <div class="qrcode">
+            <img src="images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+            <button>SitePetAmigo.br</button>
+        </div>
+        <div class="contato">
+            <h3>Contato</h3>
+            <p><img src="images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+            <p><img src="images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+        </div>
+        <div class="coracao">
+            <img src="images/transferir.webp" alt="Coração com pata">
+        </div>
+    </footer>
+</body>
+</html>

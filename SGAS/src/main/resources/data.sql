@@ -15,10 +15,10 @@ VALUES
 
 INSERT INTO animal (porte, sexo, data_nascimento, descricao, imagem_url, nome, raca) 
 VALUES 
-('P', 'M', '2025-06-01', 'Muito novo', 'url1', 'tico', 'pincher'),
-('M', 'F', '2024-11-21', 'Muito arisco', 'url2', 'diana', 'vira-lata'),
-('G', 'M', '2025-02-14', 'Muito esperto', 'url3', 'lampiao', 'labrador'),
-('M', 'F', '2024-08-25', 'Muito chata', 'url2', 'lola', 'indefinida');
+('P', 'M', '2025-06-01', 'Muito novo', 'url1', 'Tico', 'pincher'),
+('M', 'F', '2024-11-21', 'Muito arisco', 'url2', 'Diana', 'vira-lata'),
+('G', 'M', '2025-02-14', 'Muito esperto', 'url3', 'Lampiao', 'labrador'),
+('M', 'F', '2024-08-25', 'Muito chata', 'url2', 'Lola', 'indefinida');
 
 
 INSERT INTO servico (vagas, data, descricao, tipo, titulo, turno) 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pet Amigo - Cadastrar</title>
+    <link rel="stylesheet" href="/css/modelo.css">
+    <link rel="shortcut icon" href="/images/iconesite.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<header id="header-login">
+	        <div class="logo">
+				<a href="/">
+	            <img src="/images/patas.png" alt="Logo de pata Pet Amigo">
+				</a>
+	            <h1>Pet Amigo</h1>
+	        </div>
+			<ul sec:authorize="isAuthenticated()" >
+				    <button class="log" th:text="${principal.nome}"></button>
+					<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
+					<button class="log">Área do Administrador</button>
+					</a>
+			    </ul>
+				        
+				<div  sec:authorize="isAuthenticated() == false" >
+				   <a href="/login"><button class="log">Faça Login</button></a>
+				</div>    
+	    </header>
+		
+		<header id="header-1">
+		    <nav>
+		        <a href="/administrador">Home</a>
+		        <div class="dropdown">
+		            <a href>Gestão de doações</a>
+		            <div class="dropdown-content">
+		                <a href="quero-adotar.html">Cadastrar doação</a>
+		                <a href="#">Ver doações</a>
+		            </div>
+		        </div>
+
+		        <div class="dropdown">
+		            <a href="#">Animais para adoção</a>
+		            <div class="dropdown-content">
+		                <a href="/administrador/cadastrar-animal">Cadastrar animal</a>
+						<a href="/administrador/listasolicitacoes">Solicitações de Adoção</a>
+		            </div>
+		        </div>
+
+		        <div class="dropdown">
+		            <a href="#">Voluntários</a>
+		            <div class="dropdown-content">
+		                <a href="#">Adicionar tarefa</a>
+		                <a href="/administrador/listacandidaturas">Candidatos</a>
+		            </div>
+		        </div>
+		    </nav>
+		</header>
+
+    <main>
+        
+   
+    </main>
+
+    <footer>
+        <div class="sobre">
+            <img src="/images/pata.png" alt="Ícone de pata">
+            <p>Lorem Ipsum is simply dummy text.</p>
+        </div>
+        <div class="qrcode">
+            <img src="/images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+            <button>SitePetAmigo.br</button>
+        </div>
+        <div class="contato">
+            <h3>Contato</h3>
+            <p><img src="/images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+            <p><img src="/images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+        </div>
+        <div class="coracao">
+            <img src="/images/transferir.webp" alt="Coração com pata">
+        </div>
+    </footer>
+</body>
+</html>

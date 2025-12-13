@@ -26,6 +26,10 @@
 		<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
 		<button class="log">Área do Administrador</button>
 		</a>
+		
+		<a href="/usuario"  th:if="${principal != null && principal.isAdministrador == false}">
+				<button class="log">Área do Usuário</button>
+				</a>
     </ul>
 	        
 	<div  sec:authorize="isAuthenticated() == false" >
