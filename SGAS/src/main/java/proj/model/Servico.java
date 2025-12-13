@@ -27,3 +27,4 @@ public class Servico {
 	private int vagas;
 	
 }
+
