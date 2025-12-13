@@ -10,12 +10,16 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "usario_fav_animal")
 public class Favoritos {
+	
+	
 	
 	@EqualsAndHashCode.Include
     @EmbeddedId
@@ -30,5 +34,11 @@ public class Favoritos {
     @MapsId("usuarioId")
     @JoinColumn(name = "usuario_id")
     Usuario usuario;
-
+	
+	public Favoritos(Animal animal, Usuario usuario) {
+        this.animal = animal;
+        this.usuario = usuario;
+        this.id = new FavoritosKey(usuario.getId(), animal.getId());
+    }
+	
 }

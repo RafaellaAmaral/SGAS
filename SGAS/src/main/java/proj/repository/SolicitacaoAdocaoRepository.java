@@ -13,5 +13,7 @@ public interface SolicitacaoAdocaoRepository extends JpaRepository<SolicitacaoAd
 	 Optional<SolicitacaoAdocao> findById_UsuarioIdAndId_AnimalId(Long usuarioId, Long animalId);
 	 
 	 ArrayList<SolicitacaoAdocao> findByUsuarioId(long usuarioId);
+	 
+	 boolean existsByUsuarioIdAndAnimalId(Long usuarioId, Long animalId);
 
 }

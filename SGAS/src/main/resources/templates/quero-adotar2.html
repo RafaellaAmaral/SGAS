@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-br" >
+	  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Amigo</title>
+  <link rel="stylesheet" href="/css/modelo.css">
+  <link rel="shortcut icon" href="/images/iconesite.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header id="header-login">
+      <div class="logo">
+		<a href="/">
+      <img src="/images/patas.png" alt="Stylized paw print logo, centered and playful, representing the Pet Amigo brand in a welcoming and friendly website header">
+		</a>
+      <h1>Pet Amigo</h1>
+    </div>
+	
+	
+	
+    
+	
+	
+	<ul sec:authorize="isAuthenticated()" >
+	    <button class="log" th:text="${principal.nome}"></button>
+		<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
+		<button class="log">Área do Administrador</button>
+		</a>
+		
+		<a href="/usuario"  th:if="${principal != null && principal.isAdministrador == false}">
+				<button class="log">Área do Usuário</button>
+				</a>
+    </ul>
+	        
+	<div  sec:authorize="isAuthenticated() == false" >
+	   <a href="/login"><button class="log">Faça Login</button></a>
+	</div>    	
+	
+	
+	
+	
+	
+  </header>
+
+  <header id="header-1"> 
+   <nav>
+    <a href="#">Home</a>
+    <div class="dropdown">
+      <a href="quero-adotar.html">Quero adotar</a>
+	  <div class="dropdown-content" sec:authorize="isAuthenticated()" >
+	          <a href="/queroadotar">Adote</a>
+	          <a href="/usuario/favoritos">Animais curtidos</a>
+	        </div>
+	  	  <div class="dropdown-content" sec:authorize="isAnonymous()" >
+	  	          <a href="/queroadotar">Adote</a>
+	  	          <a href="/login">Animais curtidos</a>
+	  	        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Forma de ajudar</a>
+        <div class="dropdown-content">
+          <a href="/doacao"> Faça uma Doação</a>
+           <a href="/querovoluntariar">Seja voluntário</a>
+        </div>
+
+      </div>
+    <a href="#">Fale conosco</a>
+  </nav>
+
+  </header>
+
+  <main>		
+  		<h1 class="titulo-listas">Animais Disponíveis</h1>
+          <section class="animais-list">
+              <div class="animais-container">
+                  <article class="animais-card" th:each="animal : ${listaAnimais}">
+  					<h2 th:text="'Animal: ' + ${animal.nome}"></h2>
+                      <h2 th:text="'Raça: ' + ${animal.raca}"></h2>
+  					<p th:text="'Porte: ' + ${animal.porte}"></p>
+                      <p th:text="'Sexo: ' + ${animal.sexo}"></p>
+   <!--                  <div class="tags">
+                          <span th:text="${aluno.curso}"></span>
+                          <span th:text="${aluno.periodo}"></span>
+                      </div> --> 
+  		  			<div class="botoes-aprovar-recusar">
+						<div sec:authorize="isAuthenticated()">
+  					<form th:if="${!animaisFavoritos.contains(animal.id)}" th:action="@{'/favoritar/' + ${principal.id} + '/' + ${animal.id}}" method="post">
+  					        <button type="submit">❤️ Favoritar</button>
+  					    </form>
+						
+						<button th:if="${animaisFavoritos.contains(animal.id)}"
+						            disabled
+						            class="favoritado">
+						        ❤️ Favoritado
+						    </button>
+
+  				<form th:if="${!solicitacoesFeitas.contains(animal.id)}" th:action="@{'/adotar/' + ${principal.id} + '/' + ${animal.id}}" method="post">
+  					        <button type="submit">🐾 Adotar</button>
+  				    </form> 
+					
+					<button th:if="${solicitacoesFeitas.contains(animal.id)}"
+											            disabled
+											            class="favoritado">
+											        🐾 Solicitação Realizada
+											    </button>
+						</div>
+						
+						<div sec:authorize="isAnonymous()">
+						        <a th:href="@{/login}">
+						            <button type="button">❤️ Favoritar</button>
+						        </a>
+
+						        <a th:href="@{/login}">
+						            <button type="button">🐾 Adotar</button>
+						        </a>
+						    </div> 	
+  					</div> 
+                  </article>
+              </div>
+          </section>
+  		
+      </main>
+    <footer>
+        <div class="sobre">
+            <img src="images/pata.png" alt="Ícone de pata">
+            <p>Lorem Ipsum is simply dummy text.</p>
+        </div>
+        <div class="qrcode">
+            <img src="images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+            <button>SitePetAmigo.br</button>
+        </div>
+        <div class="contato">
+            <h3>Contato</h3>
+            <p><img src="images/icone-wpp.webp" alt="Whatsapp"> (31) 98528-6875</p>
+            <p><img src="images/paw-print.png" alt="Email"> cachorros123@gmail.com</p>
+        </div>
+        <div class="coracao">
+            <img src="images/transferir.webp" alt="Coração com pata">
+        </div>
+    </footer>
+</body>
+</html>

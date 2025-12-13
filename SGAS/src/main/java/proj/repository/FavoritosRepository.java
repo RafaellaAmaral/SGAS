@@ -10,5 +10,7 @@ import proj.model.FavoritosKey;
 public interface FavoritosRepository extends JpaRepository<Favoritos, FavoritosKey>{
 	
 	ArrayList<Favoritos> findByUsuarioId(long usuarioId);
+	
+	boolean existsByUsuarioIdAndAnimalId(Long usuarioId, Long animalId);
 
 }

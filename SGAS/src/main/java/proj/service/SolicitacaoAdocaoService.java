@@ -70,4 +70,8 @@ public class SolicitacaoAdocaoService {
 	    s.setStatus("recusada");
 	    solicitacaoAdocaoRepository.save(s);
 	}
+	
+	public boolean isFavorito(Long usuarioId, Long animalId) {
+        return solicitacaoAdocaoRepository.existsByUsuarioIdAndAnimalId(usuarioId, animalId);
+    }
 }

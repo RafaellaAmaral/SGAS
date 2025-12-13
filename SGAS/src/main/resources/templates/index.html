@@ -15,7 +15,9 @@
 <body>
   <header id="header-login">
       <div class="logo">
+		<a href="/">
       <img src="/images/patas.png" alt="Stylized paw print logo, centered and playful, representing the Pet Amigo brand in a welcoming and friendly website header">
+		</a>
       <h1>Pet Amigo</h1>
     </div>
 	
@@ -36,33 +38,32 @@
 	   <a href="/login"><button class="log">Faça Login</button></a>
 	</div>    	
 	
-	
-	
-	
-	
   </header>
 
   <header id="header-1"> 
    <nav>
-    <a href="#">Home</a>
+    <a href="/">Home</a>
     <div class="dropdown">
-      <a href="/quero-adotar">Quero adotar</a>
-      <div class="dropdown-content">
-        <a href="/quero-adotar">Adote</a>
-        <a href="#">Animais curtidos</a>
+      <a href="#">Quero adotar</a>
+      <div class="dropdown-content" sec:authorize="isAuthenticated()" >
+        <a href="/queroadotar">Adote</a>
+        <a href="/usuario/favoritos">Animais curtidos</a>
       </div>
+	  <div class="dropdown-content" sec:authorize="isAnonymous()" >
+	          <a href="/queroadotar">Adote</a>
+	          <a href="/login">Animais curtidos</a>
+	        </div>
       </div>
 
       <div class="dropdown">
         <a href="#">Forma de ajudar</a>
         <div class="dropdown-content">
-          <a href="#"> Faça uma Doação</a>
-           <a href="/voluntarios">Seja voluntário</a>
+          <a href="/doacao"> Faça uma Doação</a>
+           <a href="/querovoluntariar">Seja voluntário</a>
         </div>
 
       </div>
     <a href="#">Fale conosco</a>
-    <button class="doacao">Faça uma doação</button>
   </nav>
 
   </header>

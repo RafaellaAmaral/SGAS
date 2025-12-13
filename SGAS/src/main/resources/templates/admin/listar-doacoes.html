@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Amigo - Cadastrar Serviço</title>
+    <title>Pet Amigo - Doações</title>
     <link rel="stylesheet" href="/css/cadastro-adm.css">
-    <link rel="shortcut icon" href="/images/iconesite.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header id="header-login">
         <div class="logo">
-            <img src="/images/patas.png" alt="Logo de pata Pet Amigo">
+            <a href="/">
+                <img src="/images/patas.png" alt="Logo de pata Pet Amigo">
+            </a>
             <h1>Pet Amigo</h1>
         </div>
         <ul sec:authorize="isAuthenticated()">
@@ -21,13 +21,12 @@
                 <button class="log">Área do Administrador</button>
             </a>
         </ul>
-        
+
         <div sec:authorize="isAuthenticated() == false">
             <a href="/login"><button class="log">Faça Login</button></a>
         </div>
     </header>
-
-   <header id="header-1">
+<header id="header-1">
 		    <nav>
 		        <a href="/administrador">Home</a>
 		        <div class="dropdown">
@@ -59,33 +58,35 @@
 
     <main>
         <div class="form-container">
-            <h2>Cadastro de novo serviço</h2>
+            <h2>Doações cadastradas</h2>
 
-            <form action="/administrador/cadastrar-servico2" method="post">
-                <label>Título:</label>
-                <input type="text" name="titulo" required>
+            <table border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Valor (R$)</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
 
-                <label>Descrição:</label>
-                <textarea name="descricao" rows="4" required></textarea>
+                <tbody>
+                    <tr th:each="d : ${doacoes}">
+                        <td th:text="${d.id}"></td>
+                        <td th:text="${d.doador.nome}"></td> <!-- Assumindo relacionamento com Usuario -->
+                        <td th:text="${d.valor}"></td>
+                        <td th:text="${d.observacao}"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-                <label>Tipo:</label>
-                <input type="text" name="tipo" required>
+            <br>
+            <a href="/administrador/cadastrar-doacao">Cadastrar nova doação</a>
 
-                <label>Turno:</label>
-                <select name="turno" required>
-                    <option value="manhã">Manhã</option>
-                    <option value="tarde">Tarde</option>
-                    <option value="noite">Noite</option>
-                </select>
-
-                <label>Vagas:</label>
-                <input type="number" name="vagas" required min="1">
-
-                <label>Data:</label>
-                <input type="date" name="data" required>
-
-                <input type="submit" value="Cadastrar Serviço">
-            </form>
+            <div th:if="${mensagem}" class="alert alert-success"
+                style="margin: 20px; padding: 10px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px;">
+                <p th:text="${mensagem}"></p>
+            </div>
         </div>
     </main>
 
@@ -96,7 +97,7 @@
         </div>
 
         <div class="qrcode">
-            <img src="/images/qrsgas.png" alt="QR Code para doação" id="qr-code">
+            <img src="/images/qrsgas.png" alt="QR Code" id="qr-code">
             <button>SitePetAmigo.br</button>
         </div>
 

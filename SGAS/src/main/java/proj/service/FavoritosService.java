@@ -46,6 +46,13 @@ public class FavoritosService {
 	public Favoritos buscarPeloId(FavoritosKey id) {
 		return favoritosRepository.getById(id);
 	}
+	
+	public boolean isFavorito(Long usuarioId, Long animalId) {
+        return favoritosRepository.existsByUsuarioIdAndAnimalId(usuarioId, animalId);
+    }
 
+	public List<Favoritos> buscarAnimaisFavoritos(Long usuarioId) {
+	    return favoritosRepository.findByUsuarioId(usuarioId);
+	}
 
 }

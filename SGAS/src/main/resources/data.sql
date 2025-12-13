@@ -37,20 +37,20 @@ VALUES
 (4, 3,'2025-12-06','pendente')
 ;
 
-INSERT INTO doacao_financeira (id, valor, usuario_id, observacao) 
+INSERT INTO doacao_financeira (valor, usuario_id, observacao) 
 VALUES 
-(1, 30.0, 2,' '),
-(2, 10.0, 3,'para comprar produtos de higiene'),
-(3, 15.0, 2,'gastei a toa'),
-(4, 5.0, 4,'para comprar ração')
+( 30.0, 2,' '),
+( 10.0, 3,'para comprar produtos de higiene'),
+(15.0, 2,'gastei a toa'),
+( 5.0, 4,'para comprar ração')
 ;
 
-INSERT INTO solicitacao_adocao (id, usuario_id, animal_id, data_solicitacao, status) 
+INSERT INTO solicitacao_adocao (usuario_id, animal_id, data_solicitacao, status) 
 VALUES 
-(1, 5, 1,'2025-12-10','pendente'),
-(2, 2, 1,'2025-11-11','aprovada'),
-(3, 3, 4,'2025-10-07','recusada'),
-(4, 4, 3,'2025-12-06','pendente')
+(5, 1,'2025-12-10','pendente'),
+(2, 1,'2025-11-11','aprovada'),
+(3, 4,'2025-10-07','recusada'),
+(4, 3,'2025-12-06','pendente')
 ;
 
 INSERT INTO usario_fav_animal (animal_id, usuario_id) 

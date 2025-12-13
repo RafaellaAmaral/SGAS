@@ -20,5 +20,7 @@ public interface CandidaturaServicoRepository extends JpaRepository<CandidaturaS
 	ArrayList<CandidaturaServico> findByServicoId(long servicoId);
 	
 	ArrayList<CandidaturaServico> findByUsuarioId(long usuarioId);
+	
+	boolean existsByUsuarioIdAndServicoId(Long usuarioId, Long servicoId);
  
 }
