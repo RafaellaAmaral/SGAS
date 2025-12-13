@@ -63,10 +63,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
     
-    public UsuarioController() {
-    	this.usuarioService = null;
-    }
-	
 	@GetMapping
     public String mostraIndexAdmin(Model model, Principal principal, HttpServletRequest request) {
     	

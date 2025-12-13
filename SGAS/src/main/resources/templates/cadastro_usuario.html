@@ -80,7 +80,7 @@
           <input type="hidden" name="isAdministrador" value="false">
           <button type="submit" class="btn">Cadastrar</button>
         </form>
-        <p class="toggle">Já tem cadastro? <a href="#" id="mostrar-login">Entrar</a></p>
+        <p class="toggle">Já tem cadastro? <a href="" id="mostrar-login">Entrar</a></p>
       </div>
     </div>
   </main>
@@ -125,7 +125,7 @@
       const payload = { nome, email, senha, isAdministrador: false };
 
       try {
-        const res = await fetch('/usuarios/register', {
+        const res = await fetch('/usuario/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
