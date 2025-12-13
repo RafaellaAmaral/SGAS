@@ -29,44 +29,34 @@
     </header>
 
 <header id="header-1">
-    <nav>
-        <a href="/administrador/pag-inicial">Home</a>
+		    <nav>
+		        <a href="/administrador">Home</a>
+		        <div class="dropdown">
+		            <a href>Gestão de doações</a>
+		            <div class="dropdown-content">
+		                <a href="/administrador/cadastrar-doacao">Cadastrar doação</a>
+		                <a href="/administrador/listar-doacoes">Ver doações</a>
+		            </div>
+		        </div>
 
-        <div class="dropdown">
-            <a href="#">Gestão de doações</a>
-            <div class="dropdown-content">
-                <a href="#">Cadastrar doação</a>
-                <a href="#">Ver doações</a>
-            </div>
-        </div>
+		        <div class="dropdown">
+		            <a href="#">Animais para adoção</a>
+		            <div class="dropdown-content">
+		                <a href="/administrador/cadastrar-animal">Cadastrar animal</a>
+                        <a href="/administrador/listar-animais">Listar animais</a>
+						<a href="/administrador/listasolicitacoes">Solicitações de Adoção</a>
+		            </div>
+		        </div>
 
-        <div class="dropdown">
-            <a href="#">Animais para adoção</a>
-            <div class="dropdown-content">
-                <a href="/administrador/cadastrar-animal">Cadastrar animal</a>
-                <a href="/administrador/listar-animais">Listar animais</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <a href="#">Serviços</a>
-            <div class="dropdown-content">
-                <a href="/administrador/cadastrar-servico">Cadastrar serviço</a>
-                <a href="/administrador/listar-servicos">Listar serviços</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <a href="#">Voluntários</a>
-            <div class="dropdown-content">
-                <a href="/administrador/listacandidaturas">Ver candidaturas</a>
-                <a href="#">Adicionar tarefa</a>
-                <a href="#">Candidatos</a>
-            </div>
-        </div>
-    </nav>
-</header>
-
+		        <div class="dropdown">
+		            <a href="#">Voluntários</a>
+		            <div class="dropdown-content">
+		                <a href="/administrador/cadastrar-servico">Adicionar tarefa</a>
+		                <a href="/administrador/listacandidaturas">Candidatos</a>
+		            </div>
+		        </div>
+		    </nav>
+		</header>
 <main>
     <div class="form-container">
         <h2>Editar serviço</h2>
