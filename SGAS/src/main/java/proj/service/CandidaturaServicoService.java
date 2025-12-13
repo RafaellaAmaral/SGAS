@@ -72,5 +72,9 @@ public class CandidaturaServicoService {
 	public List<CandidaturaServico> listarPendentes() {
 	    return candidaturaServicoRepository.findByStatus("PENDENTE");
 	}
+	
+	public boolean isFavorito(Long usuarioId, Long servicoId) {
+        return candidaturaServicoRepository.existsByUsuarioIdAndServicoId(usuarioId, servicoId);
+    }
 
 }

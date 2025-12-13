@@ -9,11 +9,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 
 //@Getter
 //@Setter
-//@NoArgsConstructor
+@NoArgsConstructor
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -35,6 +36,14 @@ public class CandidaturaServico {
 
 	private LocalDate dataCandidatura;
 	private String status;
+	
+	public CandidaturaServico(Servico servico, Usuario usuario, String stat, LocalDate data) {
+		this.servico = servico;
+        this.usuario = usuario;
+        this.status = stat;
+        this.dataCandidatura = data;
+        this.id = new CandidaturaServicoKey(usuario.getId(), servico.getId());
+	}
     
     // standard constructors, getters, and setters
 }

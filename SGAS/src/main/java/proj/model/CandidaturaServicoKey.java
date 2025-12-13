@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 //@AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class CandidaturaServicoKey implements Serializable {
 
@@ -23,6 +23,11 @@ public class CandidaturaServicoKey implements Serializable {
 
     @Column(name = "servico_id")
     Long servicoId;
+    
+    public CandidaturaServicoKey(Long u, Long s) {
+    	this.usuarioId = u;
+    	this.servicoId = s;
+    }
 
     // standard constructors, getters, and setters
     // hashcode and equals implementation

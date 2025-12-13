@@ -5,10 +5,11 @@ import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 //@AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class FavoritosKey implements Serializable {
 	
@@ -20,5 +21,10 @@ private static final long serialVersionUID = 1L;
 
     @Column(name = "animal_id")
     Long animalId;
+    
+    public FavoritosKey(Long u, Long a) {
+    	this.usuarioId = u;
+    	this.animalId = a;
+    }
 
 }

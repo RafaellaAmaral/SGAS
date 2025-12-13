@@ -47,5 +47,9 @@ public class UsuarioService {
 
         return u;
     }
+    
+    public Usuario getById(long id) {
+    	return usuarioRepository.getById(id);
+    }
 
 }

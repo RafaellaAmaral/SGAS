@@ -10,10 +10,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class SolicitacaoAdocao {
@@ -38,4 +42,12 @@ public class SolicitacaoAdocao {
 	
     // additional properties
     // standard constructors, getters, and setters	
+	
+	public SolicitacaoAdocao(Animal animal, Usuario usuario, String stat, LocalDate data) {
+        this.animal = animal;
+        this.usuario = usuario;
+        this.status = stat;
+        this.dataSolicitacao = data;
+        this.id = new SolicitacaoAdocaoKey(usuario.getId(), animal.getId());
+    }
 }

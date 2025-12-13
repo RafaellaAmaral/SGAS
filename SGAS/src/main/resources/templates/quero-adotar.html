@@ -13,7 +13,9 @@
 <body>
     <header id="header-login">
         <div class="logo">
+			<a href="/">
             <img src="images/patas.png" alt="Logo de pata Pet Amigo">
+			</a>
             <h1>Pet Amigo</h1>
         </div>
 		<ul sec:authorize="isAuthenticated()" >
@@ -37,20 +39,23 @@
             <a href="index.html">Home</a>
             <div class="dropdown">
                 <a href="#">Quero adotar</a>
-                <div class="dropdown-content">
-                    <a href="quero-adotar.html">Adote</a>
-                    <a href="#">Animais curtidos</a>
-                </div>
+				<div class="dropdown-content" sec:authorize="isAuthenticated()" >
+				        <a href="/queroadotar">Adote</a>
+				        <a href="/usuario/favoritos">Animais curtidos</a>
+				      </div>
+					  <div class="dropdown-content" sec:authorize="isAnonymous()" >
+					          <a href="/queroadotar">Adote</a>
+					          <a href="/login">Animais curtidos</a>
+					        </div>
             </div>
             <div class="dropdown">
                 <a href="#">Forma de ajudar</a>
                 <div class="dropdown-content">
-                    <a href="doacao.html">Faça uma Doação</a>
+                    <a href="/doacao">Faça uma Doação</a>
                     <a href="voluntarios.html">Seja voluntário</a>
                 </div>
             </div>
             <a href="#">Fale conosco</a>
-            <button class="doacao">Faça uma doação</button>
         </nav>
     </header>
 
@@ -106,7 +111,24 @@
 
             </form>
         </section>
-        <section id="lista-caes" class="cards-animais"></section>
+        <section id="lista-caes" class="cards-animais">
+			<div class="candidaturas-container">
+			                <article class="candidaturas-card" th:each="animal : ${listaAnimais}">
+								<h2 th:text="'Animal: ' + ${animal.nome}"></h2>
+			 <!--                  <div class="tags">
+			                        <span th:text="${aluno.curso}"></span>
+			                        <span th:text="${aluno.periodo}"></span>
+			                    </div> --> 
+						<!--	<div class="botoes-aprovar-recusar" th:if="${solicitacao.status == 'pendente'}">
+								<form th:action="@{'/administrador/listasolicitacoes/aprovar/' + ${solicitacao.usuario.id} + '/' + ${solicitacao.animal.id}}" method="post">
+								        <button type="submit">✅ Aprovar</button>
+								    </form>
+
+								<form th:action="@{'/administrador/listasolicitacoes/aprovar/' + ${solicitacao.usuario.id} + '/' + ${solicitacao.animal.id}}" method="post">
+								        <button type="submit">❌ Recusar</button>
+							    </form>
+								</div> -->	
+		</section>
 
         <section id="filtro-gatos" class="filtro">
             <h3 class="filtro-tit">Adote um gatinho</h3>

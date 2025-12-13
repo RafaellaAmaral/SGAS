@@ -18,21 +18,24 @@
       <a href="index.html">Home</a>
       <div class="dropdown">
         <a href="quero-adotar.html">Quero adotar</a>
-        <div class="dropdown-content">
-          <a href="quero-adotar.html">Adote</a>
-          <a href="#">Animais curtidos</a>
-        </div>
+		<div class="dropdown-content" sec:authorize="isAuthenticated()" >
+		        <a href="/queroadotar">Adote</a>
+		        <a href="/usuario/favoritos">Animais curtidos</a>
+		      </div>
+			  <div class="dropdown-content" sec:authorize="isAnonymous()" >
+			          <a href="/queroadotar">Adote</a>
+			          <a href="/login">Animais curtidos</a>
+			        </div>
       </div>
 
       <div class="dropdown">
         <a href="#">Forma de ajudar</a>
         <div class="dropdown-content">
-          <a href="doacao.html">Faça uma Doação</a>
-          <a href="voluntarios.html">Seja voluntário</a>
+          <a href="/doacao">Faça uma Doação</a>
+          <a href="/querovoluntariar">Seja voluntário</a>
         </div>
       </div>
       <a href="#">Fale conosco</a>
-      <button class="doacao">Faça uma doação</button>
     </nav>
   </header>
 
@@ -117,7 +120,7 @@
       const payload = { nome, email, senha, isAdministrador: false };
 
       try {
-        const res = await fetch('/usuarios/register', {
+        const res = await fetch('/usuario/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)

@@ -406,7 +406,7 @@ public class AdministradorController {
         return "admin/cadastrar-servico";
     }
 
-    @PostMapping("/cadastrar-servico")
+    @PostMapping("/cadastrar-servico2")
     public String cadastrarServico(
             @RequestParam("titulo") String titulo,
             @RequestParam("descricao") String descricao,
