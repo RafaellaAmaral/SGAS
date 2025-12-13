@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 import proj.exception.BadRequestException;
@@ -22,6 +25,11 @@ import proj.model.CandidaturaServico;
 import proj.model.Favoritos;
 import proj.model.Servico;
 import proj.model.SolicitacaoAdocao;
+
+import proj.model.Animal;
+import proj.model.SolicitacaoAdocao;
+import proj.model.SolicitacaoAdocaoKey;
+
 import proj.model.Usuario;
 import proj.repository.AnimalRepository;
 import proj.repository.UsuarioRepository;
@@ -31,6 +39,7 @@ import proj.service.FavoritosService;
 import proj.service.ServicoService;
 import proj.service.SolicitacaoAdocaoService;
 import proj.service.UsuarioService;
+
 
 @Controller
 @RequestMapping("/")
@@ -58,34 +67,29 @@ public class HomeController {
 	CandidaturaServicoService candidaturaServicoService;
 
 
-	
-	@GetMapping
-	public String mostraPaginaInicial(Model model, Principal principal) {
-		
-		Usuario u = null;
-		
-		if (principal != null)
-    	{
-    		u = usuarioRepositorio.findByEmail(principal.getName());
-    	}
-		
-		model.addAttribute("principal", u);
+    
+    @GetMapping
+    public String mostraPaginaInicial(Model model, Principal principal) {
+        Usuario u = null;
+        if (principal != null) {
+            u = usuarioRepositorio.findByEmail(principal.getName());
+        }
+        model.addAttribute("principal", u);
+        return "index";
+    }
 
-		return "index";
-	}
-
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @GetMapping("erro")
+    @GetMapping("/erro")
     public String erro() {
         return "erro";
     }
 
-    @GetMapping("cadastro")
-    public String suco() {
+    @GetMapping("/cadastro")
+    public String cadastro() {
         return "cadastro_usuario";
     }
     

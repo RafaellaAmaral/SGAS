@@ -23,9 +23,6 @@
 	
 	
 	
-    
-	
-	
 	<ul sec:authorize="isAuthenticated()" >
 	    <button class="log" th:text="${principal.nome}"></button>
 		<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
