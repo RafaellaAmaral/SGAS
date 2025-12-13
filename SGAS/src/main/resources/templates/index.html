@@ -21,9 +21,6 @@
 	
 	
 	
-    
-	
-	
 	<ul sec:authorize="isAuthenticated()" >
 	    <button class="log" th:text="${principal.nome}"></button>
 		<a href="/administrador"  th:if="${principal != null && principal.isAdministrador}">
@@ -45,9 +42,9 @@
    <nav>
     <a href="#">Home</a>
     <div class="dropdown">
-      <a href="quero-adotar.html">Quero adotar</a>
+      <a href="/quero-adotar">Quero adotar</a>
       <div class="dropdown-content">
-        <a href="quero-adotar.html">Adote</a>
+        <a href="/quero-adotar">Adote</a>
         <a href="#">Animais curtidos</a>
       </div>
       </div>
@@ -56,7 +53,7 @@
         <a href="#">Forma de ajudar</a>
         <div class="dropdown-content">
           <a href="#"> Faça uma Doação</a>
-           <a href="voluntarios.html">Seja voluntário</a>
+           <a href="/voluntarios">Seja voluntário</a>
         </div>
 
       </div>
