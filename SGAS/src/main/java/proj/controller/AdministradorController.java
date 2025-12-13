@@ -24,14 +24,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import proj.exception.BadRequestException;
 import proj.model.Animal;
 import proj.model.CandidaturaServico;
+import proj.model.DoacaoFinanceira;
 import proj.model.Servico;
 import proj.model.SolicitacaoAdocao;
 import proj.model.Usuario;
 import proj.repository.UsuarioRepository;
 import proj.service.AnimalService;
 import proj.service.CandidaturaServicoService;
+import proj.service.DoacaoFinanceiraService;
 import proj.service.ServicoService;
 import proj.service.SolicitacaoAdocaoService;
+
 
 @Controller
 @RequestMapping("/administrador")
@@ -51,6 +54,9 @@ public class AdministradorController {
     
     @Autowired
     ServicoService servicoService;
+
+    @Autowired
+    DoacaoFinanceiraService doacaoFinanceiraService;
     
     @GetMapping
     public String mostraIndexAdmin(Model model, Principal principal, HttpServletRequest request) {
@@ -504,5 +510,89 @@ public class AdministradorController {
 
         return "redirect:/administrador/listar-servicos";
     }
+    // Métodos para doações
+@GetMapping("/cadastrar-doacao")
+public String cadastrarDoacaoForm(Model model, Principal principal, HttpServletRequest request) {
+    Usuario u = null;
+
+    if (principal != null) {
+        u = usuarioRepositorio.findByEmail(principal.getName());
+        
+        model.addAttribute("principal", u);
+
+        if (u == null) {
+            try {
+                request.logout();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    if (u == null || u.isAdministrador() == false) {
+        throw new BadRequestException("Usuário Administrador precisa estar logado.");
+    }
+    
+    return "admin/cadastrar-doacao";
+}
+
+@PostMapping("/cadastrar-doacao")
+public String cadastrarDoacao(
+        @RequestParam("valor") double valor,
+        @RequestParam("observacao") String observacao,
+        RedirectAttributes redirectAttributes, Model model, Principal principal, HttpServletRequest request) {
+    
+    Usuario u = null;
+
+    if (principal != null) {
+        u = usuarioRepositorio.findByEmail(principal.getName());
+        
+        model.addAttribute("principal", u);
+
+        if (u == null) {
+            try {
+                request.logout();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    if (u == null || u.isAdministrador() == false) {
+        throw new BadRequestException("Usuário Administrador precisa estar logado.");
+    }
+
+    DoacaoFinanceira doacao = new DoacaoFinanceira();
+    doacao.setValor(valor);
+    doacao.setObservacao(observacao);
+    doacao.setDoador(u);  // Usando 'doador' conforme o modelo
+
+    doacaoFinanceiraService.inserir(doacao);
+    redirectAttributes.addFlashAttribute("mensagem", "Doação cadastrada com sucesso!");
+    return "redirect:/administrador/listar-doacoes";
+}
+
+@GetMapping("/listar-doacoes")
+public String listarDoacoes(Model model, Principal principal, HttpServletRequest request) {
+    Usuario u = null;
+
+    if (principal != null) {
+        u = usuarioRepositorio.findByEmail(principal.getName());
+        
+        model.addAttribute("principal", u);
+
+        if (u == null) {
+            try {
+                request.logout();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    if (u == null || u.isAdministrador() == false) {
+        throw new BadRequestException("Usuário Administrador precisa estar logado.");
+    }
+
+    model.addAttribute("doacoes", doacaoFinanceiraService.listarTodos());
+    return "admin/listar-doacoes";
+}
     
 }

@@ -37,12 +37,12 @@ VALUES
 (4, 3,'2025-12-06','pendente')
 ;
 
-INSERT INTO doacao_financeira (id, valor, usuario_id, observacao) 
+INSERT INTO doacao_financeira (valor, usuario_id, observacao) 
 VALUES 
-(1, 30.0, 2,' '),
-(2, 10.0, 3,'para comprar produtos de higiene'),
-(3, 15.0, 2,'gastei a toa'),
-(4, 5.0, 4,'para comprar ração')
+( 30.0, 2,' '),
+( 10.0, 3,'para comprar produtos de higiene'),
+(15.0, 2,'gastei a toa'),
+( 5.0, 4,'para comprar ração')
 ;
 
 INSERT INTO solicitacao_adocao (usuario_id, animal_id, data_solicitacao, status) 
